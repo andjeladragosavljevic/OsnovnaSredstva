@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Ime zaposlenog -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ime" />
+
+        <EditText
+            android:id="@+id/ime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Unesite ime" />
+
+        <!-- Prezime zaposlenog -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Prezime" />
+
+        <EditText
+            android:id="@+id/prezime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Unesite prezime" />
+
+
+        <!--Pozicija zaposlenog -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pozicija" />
+
+        <EditText
+            android:id="@+id/pozicija"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Unesite poziciju" />
+
+        <!-- Dugme za spremanje -->
+        <Button
+            android:id="@+id/save_zaposleni"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Sačuvaj" />
+    </LinearLayout>
+</ScrollView>

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@id/nav_osnovno_sredsvo">
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="org.unibl.etf.osnovasredstvaapp.ui.home.HomeFragment"
+        android:label="@string/menu_home"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/nav_gallery"
+        android:name="org.unibl.etf.osnovasredstvaapp.ui.gallery.GalleryFragment"
+        android:label="@string/menu_gallery"
+        tools:layout="@layout/fragment_gallery" />
+
+    <fragment
+        android:id="@+id/nav_slideshow"
+        android:name="org.unibl.etf.osnovasredstvaapp.ui.slideshow.SlideshowFragment"
+        android:label="@string/menu_slideshow"
+        tools:layout="@layout/fragment_slideshow" />
+
+    <fragment
+        android:id="@+id/nav_osnovno_sredsvo"
+        android:name="org.unibl.etf.osnovasredstvaapp.ui.osnovnosredstvo.OsnovnoSredstvoFragment"
+        android:label="Osnovno sredstvo"
+        tools:layout="@layout/fragment_osnovno_sredstvo_list" >
+        <action
+            android:id="@+id/action_nav_osnovno_sredsvo_to_add_osnovno_sredstvo_fragment"
+            app:destination="@id/add_osnovno_sredstvo_fragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@animator/nav_default_exit_anim" />
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/add_osnovno_sredstvo_fragment"
+        android:name="org.unibl.etf.osnovasredstvaapp.ui.osnovnosredstvo.AddOsnovnoSredstvoFragment"
+        android:label="Novo osnovno sredstvo"
+        tools:layout="@layout/fragment_add_osnovno_sredstvo" />
+
+    <fragment
+        android:id="@+id/nav_zaposleni"
+        android:name="org.unibl.etf.osnovasredstvaapp.ui.zaposleni.ZaposleniFragment"
+        android:label="Zaposleni"
+        tools:layout="@layout/fragment_zaposleni_list" >
+        <action
+            android:id="@+id/action_nav_zaposleni_to_nav_add_zaposleni"
+            app:destination="@id/nav_add_zaposleni"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_add_zaposleni"
+        android:name="org.unibl.etf.osnovasredstvaapp.ui.zaposleni.AddZaposleniFragment"
+        android:label="Zaposleni"
+        tools:layout="@layout/fragment_add_zaposleni" />
+
+    <fragment
+        android:id="@+id/nav_lokacije"
+        android:name="org.unibl.etf.osnovasredstvaapp.ui.lokacija.LokacijaFragment"
+        android:label="Lokacije"
+        tools:layout="@layout/fragment_lokacija_list" >
+        <action
+            android:id="@+id/action_nav_lokacije_to_nav_add_lokacija"
+            app:destination="@id/nav_add_lokacija"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_add_lokacija"
+        android:name="org.unibl.etf.osnovasredstvaapp.ui.lokacija.AddLokacijaFragment"
+        android:label="Lokacija"
+        tools:layout="@layout/fragment_add_lokacija" />
+
+</navigation>
