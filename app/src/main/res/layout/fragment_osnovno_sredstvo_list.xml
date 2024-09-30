@@ -6,15 +6,28 @@
     android:layout_height="match_parent"
     tools:context=".ui.osnovnosredstvo.OsnovnoSredstvoFragment">
 
+    <!-- SearchView for searching by name -->
+    <SearchView
+        android:id="@+id/searchView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:queryHint="Search by name"
+        android:layout_alignParentTop="true"
+        android:layout_margin="16dp" />
+
+    <!-- RecyclerView for displaying items -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
+        android:layout_below="@id/searchView"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="8dp"
         app:layoutManager="LinearLayoutManager"
         tools:listitem="@layout/fragment_osnovno_sredstvo" />
 
+    <!-- TextView for empty view -->
     <TextView
         android:id="@+id/empty_view"
         android:layout_width="wrap_content"

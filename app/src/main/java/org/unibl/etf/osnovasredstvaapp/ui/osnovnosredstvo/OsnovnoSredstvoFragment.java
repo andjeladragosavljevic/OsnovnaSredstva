@@ -10,10 +10,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AutoCompleteTextView;
+import android.widget.SearchView;
 import android.widget.TextView;
 
+import org.unibl.etf.osnovasredstvaapp.MainActivity;
 import org.unibl.etf.osnovasredstvaapp.R;
 import org.unibl.etf.osnovasredstvaapp.dao.OsnovnoSredstvoDao;
 import org.unibl.etf.osnovasredstvaapp.database.AppDatabase;
@@ -32,6 +38,8 @@ public class OsnovnoSredstvoFragment extends Fragment {
     private OsnovnoSredstvoRecyclerViewAdapter adapter;
     private OsnovnoSredstvoDao osnovnoSredstvoDao;
     private TextView emptyView;
+    private AutoCompleteTextView filterAutoCompleteTextView;
+    private SearchView searchView;
 
     // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
@@ -58,7 +66,7 @@ public class OsnovnoSredstvoFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        setHasOptionsMenu(true);
         if (getArguments() != null) {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
         }
@@ -70,8 +78,14 @@ public class OsnovnoSredstvoFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_osnovno_sredstvo_list, container, false);
         emptyView = view.findViewById(R.id.empty_view);
 
+
+
         // Set the adapter
         Context context = getContext();
+
+        // Inicijalizacija Room baze i DAO-a
+        osnovnoSredstvoDao = AppDatabase.getInstance(getContext()).osnovnoSredstvoDao();
+
 
         recyclerView = view.findViewById(R.id.list);
         if (mColumnCount <= 1) {
@@ -84,14 +98,49 @@ public class OsnovnoSredstvoFragment extends Fragment {
         adapter = new OsnovnoSredstvoRecyclerViewAdapter(new ArrayList<>(), context);
         recyclerView.setAdapter(adapter);
 
-        // Inicijalizacija Room baze i DAO-a
-        osnovnoSredstvoDao = AppDatabase.getInstance(getContext()).osnovnoSredstvoDao();
+        Bundle args = getArguments();
+        if (args != null) {
 
-        // Pokretanje AsyncTask-a za dohvatanje podataka
-        new OsnovnoSredstvoTask(this, osnovnoSredstvoDao).execute();
+            int lokacijaId = args.getInt("LOKACIJA_ID", -1);
+            Log.d("TTT", lokacijaId+"");
+            if (lokacijaId != -1) {
+                filterByLocation(lokacijaId);  // Poziv metode za filtriranje po lokaciji
+            } else {
+                new OsnovnoSredstvoTask(this, osnovnoSredstvoDao).execute();  // Poziv za sve podatke ako nema filtriranja
+            }
+        } else {
+            // Pokretanje AsyncTask-a za dohvatanje svih podataka
+            new OsnovnoSredstvoTask(this, osnovnoSredstvoDao).execute();
+        }
+
+
         return view;
     }
 
+//    @Override
+//    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+//
+//        // Inflate the menu defined in your XML
+//        MenuItem item = menu.findItem(R.id.action_search);
+//        SearchView searchView = (SearchView) item.getActionView();
+//
+//        // Set query listeners for SearchView
+//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+//            @Override
+//            public boolean onQueryTextSubmit(String query) {
+//                // Perform search when the user submits a query
+//                filterItems(query);
+//                return true;
+//            }
+//
+//            @Override
+//            public boolean onQueryTextChange(String newText) {
+//                // Filter the list as the query text changes
+//                filterItems(newText);
+//                return true;
+//            }
+//        });
+//    }
 
     // Metoda za ažuriranje RecyclerView-a sa podacima iz baze
     public void updateList(List<OsnovnoSredstvo> osnovnaSredstva) {
@@ -111,6 +160,16 @@ public class OsnovnoSredstvoFragment extends Fragment {
                 adapter.updateData(osnovnaSredstva);
             }
         }
+    }
+
+    private void filterItems(String queryName) {
+        new OsnovnoSredstvoTask(this, osnovnoSredstvoDao, queryName).execute();
+    }
+
+    public void filterByLocation(int lokacijaId) {
+        new OsnovnoSredstvoTask(this, osnovnoSredstvoDao, OsnovnoSredstvoTask.OperationType.GETBYLOCATIONID, lokacijaId).execute();
+
+
     }
 
 }

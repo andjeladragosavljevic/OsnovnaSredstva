@@ -28,4 +28,15 @@ public interface OsnovnoSredstvoDao {
     @Query("SELECT * FROM osnovna_sredstva")
     List<OsnovnoSredstvo> getAll();
 
+    @Query("SELECT * FROM osnovna_sredstva WHERE zaduzenaLokacijaId = :lokacijaId")
+    List<OsnovnoSredstvo> getOsnovnaSredstvaByLokacijaId(int lokacijaId);
+
+
+    // Filtriranje po imenu
+    @Query("SELECT * FROM osnovna_sredstva WHERE naziv LIKE '%' || :name || '%'")
+    List<OsnovnoSredstvo> filterByName(String name);
+
+    // Filtriranje po lokaciji i imenu
+    @Query("SELECT * FROM osnovna_sredstva WHERE zaduzenaLokacijaId = :lokacijaId AND naziv LIKE '%' || :name || '%'")
+    List<OsnovnoSredstvo> filterByLocationAndName(int lokacijaId, String name);
 }

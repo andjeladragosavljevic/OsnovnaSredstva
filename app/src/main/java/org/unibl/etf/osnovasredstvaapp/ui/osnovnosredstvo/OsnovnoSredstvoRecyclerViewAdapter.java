@@ -49,9 +49,10 @@ public class OsnovnoSredstvoRecyclerViewAdapter extends RecyclerView.Adapter<Osn
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.fragment_osnovno_sredstvo, parent, false);
         return new ViewHolder(view);
-//urn new ViewHolder(FragmentOsnovnoSredstvoBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false));
 
     }
+
+
 
     public void updateData(List<OsnovnoSredstvo> newData) {
         osnovnaSredstva = newData;
@@ -109,6 +110,8 @@ public class OsnovnoSredstvoRecyclerViewAdapter extends RecyclerView.Adapter<Osn
     public int getItemCount() {
         return osnovnaSredstva.size();
     }
+
+
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final View mView;

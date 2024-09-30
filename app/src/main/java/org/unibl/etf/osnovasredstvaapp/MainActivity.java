@@ -1,6 +1,8 @@
 package org.unibl.etf.osnovasredstvaapp;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 
@@ -28,9 +30,25 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        Intent intent = getIntent();
+        if (intent != null && intent.hasExtra("LOKACIJA_ID")) {
+            int lokacijaId = intent.getIntExtra("LOKACIJA_ID", 0);
+
+            // Dobijte NavController i navigirajte na fragment sa prosleđenim podacima
+            NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
+
+            // Kreirajte Bundle sa argumentima
+            Bundle args = new Bundle();
+            args.putInt("LOKACIJA_ID", lokacijaId);
+            Log.d("BLA", lokacijaId+"");
+
+            // Navigirajte ka `OsnovnoSredstvoFragment` unutar NavHost-a
+            navController.navigate(R.id.action_nav_osnovno_sredsvo_to_nav_osnovno_sredsvo_fragment, args);
+        }
         setSupportActionBar(binding.appBarMain.toolbar);
         binding.appBarMain.fab.setOnClickListener(new View.OnClickListener() {
             @Override
+
             public void onClick(View view) {
                 NavController navController = Navigation.findNavController(MainActivity.this, R.id.nav_host_fragment_content_main);
                 int currentDestinationId = navController.getCurrentDestination().getId();

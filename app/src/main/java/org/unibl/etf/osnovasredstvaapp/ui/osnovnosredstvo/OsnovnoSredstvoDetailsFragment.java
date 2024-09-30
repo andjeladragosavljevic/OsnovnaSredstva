@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.unibl.etf.osnovasredstvaapp.R;
 import org.unibl.etf.osnovasredstvaapp.dao.LokacijaDao;
@@ -90,18 +91,21 @@ public class OsnovnoSredstvoDetailsFragment extends Fragment {
         // Slično ranijem načinu prikaza slike
     }
 
-   private void otvoriLokacijuNaMapi() {
+    private void otvoriLokacijuNaMapi() {
         Lokacija lokacija = lokacijaDao.getById(osnovnoSredstvo.getZaduzenaLokacijaId());
+
         if (lokacija != null) {
-            String uri = String.format("geo:%s,%s?q=%s,%s(%s)",
-                    lokacija.getLatitude(),
-                    lokacija.getLongitude(),
-                    lokacija.getLatitude(),
-                    lokacija.getLongitude(),
-                    lokacija.getAdresa() + ", " + lokacija.getGrad());
-            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
-            intent.setPackage("com.google.android.apps.maps");
-            startActivity(intent);
+            // Prosledite latitude i longitude vrednosti u Intent
+            Intent intent = new Intent(getContext(), MapsActivity.class);
+            intent.putExtra("LATITUDE", lokacija.getLatitude());
+            intent.putExtra("LONGITUDE", lokacija.getLongitude());
+            intent.putExtra("NAZIV_LOKACIJE", lokacija.getGrad() + ", " + lokacija.getAdresa());
+            intent.putExtra("LOKACIJA_ID", lokacija.getId());
+
+            startActivity(intent);  // Pokrenite MapsActivity
+        } else {
+            Toast.makeText(getContext(), "Lokacija nije pronađena", Toast.LENGTH_SHORT).show();
         }
     }
+
 }

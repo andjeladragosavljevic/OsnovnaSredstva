@@ -152,13 +152,28 @@ public class AddOsnovnoSredstvoFragment extends Fragment {
 
 
         autoCompleteTextViewOsoba.setOnItemClickListener((parent, view1, position, id) -> {
+            String selectedZaposleniName = (String) parent.getItemAtPosition(position); // Dobijte ime zaposlenog iz prikazane liste
 
-            selectedZaposleni = zaposleniList.get(position); // Sačuvaj izabranog zaposlenog
-            Log.d("ZAP", selectedZaposleni.getId() + "");
+            for (Zaposleni zaposleni : zaposleniList) {
+                if ((zaposleni.getIme() + " " + zaposleni.getPrezime()).equals(selectedZaposleniName)) {
+                    selectedZaposleni = zaposleni; // Pronađen zaposleni
+                    Log.d("ZAPOSLENI", "Izabran zaposleni ID: " + selectedZaposleni.getId() + ", Ime: " + selectedZaposleni.getIme() + " " + selectedZaposleni.getPrezime());
+                    break;
+                }
+            }
         });
 
         autoCompleteTextViewLokacija.setOnItemClickListener((parent, view1, position, id) -> {
-            selectedLokacija = lokacijaList.get(position); // Sačuvaj izabranu lokaciju
+            String selectedLokacijaName = (String) parent.getItemAtPosition(position); // Dobijte ime lokacije iz prikazane liste
+
+            // Pronađite odgovarajuću lokaciju u originalnoj listi na osnovu imena
+            for (Lokacija lokacija : lokacijaList) {
+                if ((lokacija.getGrad() + ", " + lokacija.getAdresa()).equals(selectedLokacijaName)) {
+                    selectedLokacija = lokacija; // Pronađena lokacija
+                    Log.d("LOKACIJA", "Izabrana lokacija ID: " + selectedLokacija.getId() + ", Naziv: " + selectedLokacija.getGrad());
+                    break;
+                }
+            }
         });
 
 

@@ -10,15 +10,31 @@ import java.lang.ref.WeakReference;
 import java.util.List;
 
 public class OsnovnoSredstvoTask extends AsyncTask<Void, Void, List<OsnovnoSredstvo>> {
+    private int lokacijaId;
+    private String locationFilter;
+    private String nameFilter;
 
     public enum OperationType {
-        INSERT, UPDATE, DELETE, READ
+        INSERT, UPDATE, DELETE, READ, GETBYLOCATIONID, FILTER
     }
 
     private WeakReference<OsnovnoSredstvoFragment> fragmentReference;
     private OsnovnoSredstvoDao osnovnoSredstvoDao;
     private OperationType operationType;
     private OsnovnoSredstvo osnovnoSredstvo;
+
+    public OsnovnoSredstvoTask(OsnovnoSredstvoFragment fragment, OsnovnoSredstvoDao dao, String nameFilter) {
+        this.fragmentReference = new WeakReference<>(fragment);
+        this.osnovnoSredstvoDao = dao;
+        this.nameFilter = nameFilter;
+        this.operationType = OperationType.FILTER;
+    }
+    public OsnovnoSredstvoTask(OsnovnoSredstvoFragment fragment, OsnovnoSredstvoDao osnovnoSredstvoDao,  OperationType operationType, int lokacijaId) {
+        this.fragmentReference = new WeakReference<>(fragment);
+        this.osnovnoSredstvoDao = osnovnoSredstvoDao;
+        this.operationType = operationType;
+        this.lokacijaId = lokacijaId;
+    }
 
     // Konstruktor za INSERT, UPDATE i DELETE operacije
     public OsnovnoSredstvoTask(OsnovnoSredstvoFragment fragment, OsnovnoSredstvoDao dao, OperationType operationType, OsnovnoSredstvo osnovnoSredstvo) {
@@ -40,6 +56,14 @@ public class OsnovnoSredstvoTask extends AsyncTask<Void, Void, List<OsnovnoSreds
         Log.d("OsnovnoSredstvoTask", "Operation: " + operationType);
 
         switch (operationType) {
+            case FILTER: {
+                   if (!nameFilter.isEmpty()) {
+                        return osnovnoSredstvoDao.filterByName(nameFilter);
+                    } else {
+                        return osnovnoSredstvoDao.getAll();
+                    }
+
+            }
             case INSERT: {
                 try {
                     osnovnoSredstvoDao.insert(osnovnoSredstvo);
@@ -49,6 +73,9 @@ public class OsnovnoSredstvoTask extends AsyncTask<Void, Void, List<OsnovnoSreds
                 }
 
             }
+            case GETBYLOCATIONID:
+                return osnovnoSredstvoDao.getOsnovnaSredstvaByLokacijaId(lokacijaId);
+
             case UPDATE:
                 osnovnoSredstvoDao.update(osnovnoSredstvo);
                 break;
