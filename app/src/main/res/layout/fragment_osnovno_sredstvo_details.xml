@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/textViewNaziv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Naziv:"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textViewOpis"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Opis" />
+
+        <TextView
+            android:id="@+id/textViewBarkod"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Barkod" />
+
+        <TextView
+            android:id="@+id/textViewCijena"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cijena" />
+
+        <TextView
+            android:id="@+id/textViewDatumKreiranja"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Datum Kreiranja" />
+
+        <TextView
+            android:id="@+id/textViewOsoba"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Zadužena osoba" />
+
+        <TextView
+            android:id="@+id/textViewLokacija"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Lokacija" />
+
+        <ImageView
+            android:id="@+id/imageViewSlika"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="Slika osnovnog sredstva" />
+    </LinearLayout>
+
+    <fragment
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+
+</ScrollView>

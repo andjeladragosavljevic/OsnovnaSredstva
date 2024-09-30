@@ -81,7 +81,7 @@ public class OsnovnoSredstvoFragment extends Fragment {
         }
 
         // Postavljanje praznog adaptera dok se ne učitaju podaci
-        adapter = new OsnovnoSredstvoRecyclerViewAdapter(new ArrayList<>());
+        adapter = new OsnovnoSredstvoRecyclerViewAdapter(new ArrayList<>(), context);
         recyclerView.setAdapter(adapter);
 
         // Inicijalizacija Room baze i DAO-a
@@ -105,7 +105,7 @@ public class OsnovnoSredstvoFragment extends Fragment {
             emptyView.setVisibility(View.GONE);
 
             if (adapter == null) {
-                adapter = new OsnovnoSredstvoRecyclerViewAdapter(osnovnaSredstva);
+                adapter = new OsnovnoSredstvoRecyclerViewAdapter(osnovnaSredstva, getContext());
                 recyclerView.setAdapter(adapter);
             } else {
                 adapter.updateData(osnovnaSredstva);

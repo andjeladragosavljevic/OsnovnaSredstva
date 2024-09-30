@@ -1,6 +1,8 @@
 package org.unibl.etf.osnovasredstvaapp.ui.osnovnosredstvo;
 
 import android.os.AsyncTask;
+import android.util.Log;
+
 import org.unibl.etf.osnovasredstvaapp.dao.OsnovnoSredstvoDao;
 import org.unibl.etf.osnovasredstvaapp.entity.OsnovnoSredstvo;
 
@@ -35,10 +37,18 @@ public class OsnovnoSredstvoTask extends AsyncTask<Void, Void, List<OsnovnoSreds
 
     @Override
     protected List<OsnovnoSredstvo> doInBackground(Void... voids) {
+        Log.d("OsnovnoSredstvoTask", "Operation: " + operationType);
+
         switch (operationType) {
-            case INSERT:
-                osnovnoSredstvoDao.insert(osnovnoSredstvo);
-                break;
+            case INSERT: {
+                try {
+                    osnovnoSredstvoDao.insert(osnovnoSredstvo);
+                    Log.d("OsnovnoSredstvoTask", "Insert success");
+                } catch (Exception e) {
+                    Log.e("OsnovnoSredstvoTask", "Insert error: " + e.getMessage());
+                }
+
+            }
             case UPDATE:
                 osnovnoSredstvoDao.update(osnovnoSredstvo);
                 break;

@@ -26,7 +26,7 @@ import org.unibl.etf.osnovasredstvaapp.ui.zaposleni.ZaposleniTask;
  * create an instance of this fragment.
  */
 public class AddLokacijaFragment extends Fragment {
-    private EditText gradEt, adresaEt;
+    private EditText gradEt, adresaEt, longitudeEt, latitudeEt;
     private Button saveButton;
     private LokacijaDao lokacijaDao;
     private Lokacija lokacijaZaAzuriranje;
@@ -81,6 +81,8 @@ public class AddLokacijaFragment extends Fragment {
 
         gradEt = view.findViewById(R.id.grad);
         adresaEt = view.findViewById(R.id.adresa);
+        longitudeEt = view.findViewById(R.id.longitude);
+        latitudeEt = view.findViewById(R.id.latitude);
         saveButton = view.findViewById(R.id.save_lokacija);
 
         // Inicijalizacija DAO objekta
@@ -90,6 +92,8 @@ public class AddLokacijaFragment extends Fragment {
         if (lokacijaZaAzuriranje != null) {
             gradEt.setText(lokacijaZaAzuriranje.getGrad());
             adresaEt.setText(lokacijaZaAzuriranje.getAdresa());
+            longitudeEt.setText(lokacijaZaAzuriranje.getLongitude());
+            latitudeEt.setText(lokacijaZaAzuriranje.getLatitude());
             saveButton.setText("Ažuriraj lokaciju");
         }
 
@@ -98,9 +102,11 @@ public class AddLokacijaFragment extends Fragment {
             public void onClick(View v){
                 String grad = gradEt.getText().toString();
                 String adresa = adresaEt.getText().toString();
+                String longitude = longitudeEt.getText().toString();
+                String latitude = latitudeEt.getText().toString();
 
 
-                if (grad.isEmpty() || adresa.isEmpty()) {
+                if (grad.isEmpty() || adresa.isEmpty() || longitude.isEmpty() || latitude.isEmpty()) {
                     Toast.makeText(getContext(), "Sva polja moraju biti popunjena", Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -110,6 +116,8 @@ public class AddLokacijaFragment extends Fragment {
                     Lokacija novaLokacija = new Lokacija();
                     novaLokacija.setGrad(grad);
                     novaLokacija.setAdresa(adresa);
+                    novaLokacija.setLongitude(longitude);
+                    novaLokacija.setLatitude(latitude);
 
                     new LokacijaTask(null, lokacijaDao, LokacijaTask.OperationType.INSERT, novaLokacija).execute();
                     Toast.makeText(getContext(), "Lokacija uspješno dodat", Toast.LENGTH_SHORT).show();
@@ -117,6 +125,8 @@ public class AddLokacijaFragment extends Fragment {
 
                     lokacijaZaAzuriranje.setGrad(grad);
                     lokacijaZaAzuriranje.setAdresa(adresa);
+                    lokacijaZaAzuriranje.setLongitude(longitude);
+                    lokacijaZaAzuriranje.setLatitude(latitude);
 
 
                     new LokacijaTask(null, lokacijaDao, LokacijaTask.OperationType.UPDATE, lokacijaZaAzuriranje).execute();

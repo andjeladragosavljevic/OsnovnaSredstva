@@ -22,7 +22,7 @@ import org.unibl.etf.osnovasredstvaapp.entity.PopisnaStavka;
 import org.unibl.etf.osnovasredstvaapp.entity.Zaposleni;
 
 
-@Database(entities = {OsnovnoSredstvo.class, Zaposleni.class, Lokacija.class, PopisnaStavka.class, PopisnaLista.class}, version = 1)
+@Database(entities = {OsnovnoSredstvo.class, Zaposleni.class, Lokacija.class, PopisnaStavka.class, PopisnaLista.class}, version = 3)
 public abstract class AppDatabase extends RoomDatabase {
     private static AppDatabase instance;
 
@@ -39,7 +39,7 @@ public abstract class AppDatabase extends RoomDatabase {
                             AppDatabase.class, "osnovna_sredstva_db")
                   //  .addCallback(roomCallback)
                     // Možete koristiti ovaj metod tokom razvoja, ne u produkciji
-                    //.fallbackToDestructiveMigration()
+                    .fallbackToDestructiveMigration()
                     .allowMainThreadQueries()
                     .build();
         }
@@ -83,7 +83,7 @@ public abstract class AppDatabase extends RoomDatabase {
             OsnovnoSredstvo osnovnoSredstvo1 = new OsnovnoSredstvo();
             osnovnoSredstvo1.setNaziv("Laptop");
             osnovnoSredstvo1.setOpis("Prenosni računar");
-            osnovnoSredstvo1.setBarkod(123456);
+            osnovnoSredstvo1.setBarkod("123456");
             osnovnoSredstvo1.setCijena(1500.0);
             osnovnoSredstvo1.setDatumKreiranja("2024-09-28");
             osnovnoSredstvo1.setZaduzenaOsobaId(1);  // ID zaposlenog
@@ -93,7 +93,7 @@ public abstract class AppDatabase extends RoomDatabase {
             OsnovnoSredstvo osnovnoSredstvo2 = new OsnovnoSredstvo();
             osnovnoSredstvo2.setNaziv("Printer");
             osnovnoSredstvo2.setOpis("Oprema za štampanje");
-            osnovnoSredstvo2.setBarkod(789012);
+            osnovnoSredstvo2.setBarkod("789012");
             osnovnoSredstvo2.setCijena(500.0);
             osnovnoSredstvo2.setDatumKreiranja("2024-09-27");
             osnovnoSredstvo2.setZaduzenaOsobaId(2);  // ID zaposlenog

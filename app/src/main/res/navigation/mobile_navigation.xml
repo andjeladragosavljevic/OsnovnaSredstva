@@ -33,6 +33,9 @@
             app:destination="@id/add_osnovno_sredstvo_fragment"
             app:enterAnim="@anim/nav_default_enter_anim"
             app:exitAnim="@animator/nav_default_exit_anim" />
+        <action
+            android:id="@+id/action_nav_osnovno_sredsvo_to_nav_details"
+            app:destination="@id/nav_details" />
     </fragment>
 
 
@@ -76,5 +79,11 @@
         android:name="org.unibl.etf.osnovasredstvaapp.ui.lokacija.AddLokacijaFragment"
         android:label="Lokacija"
         tools:layout="@layout/fragment_add_lokacija" />
+
+    <fragment
+        android:id="@+id/nav_details"
+        android:name="org.unibl.etf.osnovasredstvaapp.ui.osnovnosredstvo.OsnovnoSredstvoDetailsFragment"
+        android:label="Lokacija"
+        tools:layout="@layout/fragment_osnovno_sredstvo_details" />
 
 </navigation>

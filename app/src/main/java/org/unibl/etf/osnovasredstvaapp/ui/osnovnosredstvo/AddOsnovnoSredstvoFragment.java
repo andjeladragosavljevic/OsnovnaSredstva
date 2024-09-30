@@ -1,6 +1,7 @@
 package org.unibl.etf.osnovasredstvaapp.ui.osnovnosredstvo;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -9,6 +10,7 @@ import android.os.Bundle;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.core.content.ContextCompat;
+import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 
 import android.os.Environment;
@@ -31,6 +33,7 @@ import com.journeyapps.barcodescanner.ScanContract;
 
 import org.unibl.etf.osnovasredstvaapp.R;
 import org.unibl.etf.osnovasredstvaapp.dao.LokacijaDao;
+import org.unibl.etf.osnovasredstvaapp.dao.OsnovnoSredstvoDao;
 import org.unibl.etf.osnovasredstvaapp.dao.ZaposleniDao;
 import org.unibl.etf.osnovasredstvaapp.database.AppDatabase;
 import org.unibl.etf.osnovasredstvaapp.entity.Lokacija;
@@ -47,12 +50,21 @@ import java.util.List;
  * create an instance of this fragment.
  */
 public class AddOsnovnoSredstvoFragment extends Fragment {
+    private OsnovnoSredstvo osnovnoSredstvo;
     private EditText nazivOsnovnogSredstva;
     private EditText opisOsnovnogSredstva;
     private Button saveButton;
     private EditText barcodeEditText;
     private EditText cijenaOsnovnogSredstva;
     private DatePicker datumKreiranja;
+
+    private Zaposleni selectedZaposleni;
+    private Lokacija selectedLokacija;
+
+    private OsnovnoSredstvoDao osnovnoSredstvoDao;
+    private OsnovnoSredstvo osnovnoSredstvoZaAzuriranje;
+
+    private static final String ARG_OS = "osnovnoSredstvo";
 
     private ImageView imageView;
     private Button uploadImageButton, takePictureButton;
@@ -71,20 +83,12 @@ public class AddOsnovnoSredstvoFragment extends Fragment {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment AddOsnovnoSredstvoFragment.
-     */
+
     // TODO: Rename and change types and number of parameters
-    public static AddOsnovnoSredstvoFragment newInstance(String param1, String param2) {
+    public static AddOsnovnoSredstvoFragment newInstance(OsnovnoSredstvo osnovnoSredstvo) {
         AddOsnovnoSredstvoFragment fragment = new AddOsnovnoSredstvoFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+        args.putSerializable(ARG_OS, osnovnoSredstvo);
         fragment.setArguments(args);
         return fragment;
     }
@@ -93,8 +97,7 @@ public class AddOsnovnoSredstvoFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            osnovnoSredstvoZaAzuriranje = (OsnovnoSredstvo) getArguments().getSerializable(ARG_OS);
         }
     }
 
@@ -103,9 +106,19 @@ public class AddOsnovnoSredstvoFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_add_osnovno_sredstvo, container, false);
+        osnovnoSredstvo = new OsnovnoSredstvo();
 
+        // Inicijalizacija svih polja
         nazivOsnovnogSredstva = view.findViewById(R.id.naziv_osnovno_sredtsvo);
         opisOsnovnogSredstva = view.findViewById(R.id.opis_osnovno_sredstvo);
+        barcodeEditText = view.findViewById(R.id.barkod_osnovno_sredstvo);
+        cijenaOsnovnogSredstva = view.findViewById(R.id.cijena_osnovno_sredstvo);
+        datumKreiranja = view.findViewById(R.id.datum_kreiranja_osnovno_sredstvo);
+        imageView = view.findViewById(R.id.imageView);
+
+        // Inicijalizacija dugmadi
+        uploadImageButton = view.findViewById(R.id.buttonUploadSlika);
+        takePictureButton = view.findViewById(R.id.buttonTakePicture);
         saveButton = view.findViewById(R.id.save_osnovno_sredstvo);
 
         AutoCompleteTextView autoCompleteTextViewOsoba = view.findViewById(R.id.autoCompleteTextViewOsoba);
@@ -138,6 +151,17 @@ public class AddOsnovnoSredstvoFragment extends Fragment {
         autoCompleteTextViewLokacija.setAdapter(lokacijaAdapter);
 
 
+        autoCompleteTextViewOsoba.setOnItemClickListener((parent, view1, position, id) -> {
+
+            selectedZaposleni = zaposleniList.get(position); // Sačuvaj izabranog zaposlenog
+            Log.d("ZAP", selectedZaposleni.getId() + "");
+        });
+
+        autoCompleteTextViewLokacija.setOnItemClickListener((parent, view1, position, id) -> {
+            selectedLokacija = lokacijaList.get(position); // Sačuvaj izabranu lokaciju
+        });
+
+
         barcodeEditText = view.findViewById(R.id.barkod_osnovno_sredstvo);
         Button scanBarcodeButton = view.findViewById(R.id.scanBarcodeButton);
 
@@ -149,9 +173,25 @@ public class AddOsnovnoSredstvoFragment extends Fragment {
             }
         });
 
-        imageView = view.findViewById(R.id.imageView);
-        uploadImageButton = view.findViewById(R.id.buttonUploadSlika);
-        takePictureButton = view.findViewById(R.id.buttonTakePicture);
+        if (osnovnoSredstvoZaAzuriranje != null) {
+            nazivOsnovnogSredstva.setText(osnovnoSredstvoZaAzuriranje.getNaziv());
+            opisOsnovnogSredstva.setText(osnovnoSredstvoZaAzuriranje.getOpis());
+            barcodeEditText.setText(osnovnoSredstvoZaAzuriranje.getBarkod());
+            cijenaOsnovnogSredstva.setText(String.valueOf(osnovnoSredstvoZaAzuriranje.getCijena()));
+
+            // Podešavanje datuma u DatePicker
+            String[] datumDijelovi = osnovnoSredstvoZaAzuriranje.getDatumKreiranja().split("/");
+            datumKreiranja.updateDate(
+                    Integer.parseInt(datumDijelovi[2]),
+                    Integer.parseInt(datumDijelovi[1]) - 1,
+                    Integer.parseInt(datumDijelovi[0]) // Dan
+            );
+            Log.d("SLIKA", osnovnoSredstvoZaAzuriranje.getSlika());
+            if (osnovnoSredstvoZaAzuriranje.getSlika() != null) {
+               prikaziSliku(osnovnoSredstvoZaAzuriranje.getSlika());
+            }
+        }
+
 
         // Listener za upload slike iz galerije
         uploadImageButton.setOnClickListener(v -> openGallery());
@@ -164,6 +204,7 @@ public class AddOsnovnoSredstvoFragment extends Fragment {
             String opis = opisOsnovnogSredstva.getText().toString();
             String barkod = barcodeEditText.getText().toString();
             String cijena = cijenaOsnovnogSredstva.getText().toString();
+            Log.d("CIJENA ", cijena);
 
             // Extracting the date from DatePicker
             int day = datumKreiranja.getDayOfMonth();
@@ -171,29 +212,74 @@ public class AddOsnovnoSredstvoFragment extends Fragment {
             int year = datumKreiranja.getYear();
             String datum = day + "/" + (month + 1) + "/" + year; // Datum format
 
-            String osoba = autoCompleteTextViewOsoba.getText().toString();
-            String lokacija = autoCompleteTextViewLokacija.getText().toString();
 
-            Log.d("PODACI", "Naziv: " + naziv + " Opis: " + opis + " Barkod: " + barkod + " Cijena: " + cijena + " Datum: " + datum);
+            if (osnovnoSredstvoZaAzuriranje != null) {
+                // Ažuriranje postojećeg osnovnog sredstva
+                osnovnoSredstvoZaAzuriranje.setNaziv(naziv);
+                osnovnoSredstvoZaAzuriranje.setOpis(opis);
+                osnovnoSredstvoZaAzuriranje.setBarkod(barkod);
+                osnovnoSredstvoZaAzuriranje.setCijena(Double.parseDouble(cijena));
+                osnovnoSredstvoZaAzuriranje.setDatumKreiranja(datum);
 
-            // Create and save Osnovno Sredstvo object to the database
-            OsnovnoSredstvo osnovnoSredstvo = new OsnovnoSredstvo();
-            osnovnoSredstvo.setNaziv(naziv);
-            osnovnoSredstvo.setOpis(opis);
-            osnovnoSredstvo.setBarkod(Integer.parseInt(barkod));
-            osnovnoSredstvo.setCijena(Double.parseDouble(cijena));
-            osnovnoSredstvo.setDatumKreiranja(datum);
-            //osnovnoSredstvo.setZaduzenaOsobaId(osoba.);
+                if (selectedZaposleni != null) {
+                    osnovnoSredstvoZaAzuriranje.setZaduzenaOsobaId(selectedZaposleni.getId());
+                }
+                if (selectedLokacija != null) {
+                    osnovnoSredstvoZaAzuriranje.setZaduzenaLokacijaId(selectedLokacija.getId());
+                }
 
-            new OsnovnoSredstvoTask(null, db.osnovnoSredstvoDao(), OsnovnoSredstvoTask.OperationType.INSERT, osnovnoSredstvo).execute();
+                new OsnovnoSredstvoTask(null, db.osnovnoSredstvoDao(), OsnovnoSredstvoTask.OperationType.UPDATE, osnovnoSredstvoZaAzuriranje).execute();
+            } else {
+                // Kreiranje novog osnovnog sredstva
+                osnovnoSredstvo.setNaziv(naziv);
+                osnovnoSredstvo.setOpis(opis);
+                osnovnoSredstvo.setBarkod(barkod);
+                osnovnoSredstvo.setCijena(Double.parseDouble(cijena));
+                osnovnoSredstvo.setDatumKreiranja(datum);
+                if (selectedZaposleni != null) {
+                    osnovnoSredstvo.setZaduzenaOsobaId(selectedZaposleni.getId());
+                }
+                if (selectedLokacija != null) {
+                    osnovnoSredstvo.setZaduzenaLokacijaId(selectedLokacija.getId());
+                }
+
+                new OsnovnoSredstvoTask(null, db.osnovnoSredstvoDao(), OsnovnoSredstvoTask.OperationType.INSERT, osnovnoSredstvo).execute();
+            }
+
         });
-
-
 
         return view;
 
-
     }
+
+    public void prikaziSliku(String putanjaSlike) {
+        Uri imageUri = null;
+
+        if (putanjaSlike.contains("/DCIM/Camera/")) {
+            // Slikano kamerom
+            File slikaFile = new File(putanjaSlike);
+            try {
+                imageUri = FileProvider.getUriForFile(getContext(), getContext().getPackageName() + ".fileprovider", slikaFile);
+            } catch (IllegalArgumentException e) {
+                Log.e("SLIKA", "Greška pri generisanju URI-ja: " + e.getMessage());
+            }
+        } else if (putanjaSlike.contains("/external_files/")) {
+            // Uploadovana slika
+            imageUri = Uri.parse(putanjaSlike);
+        } else {
+            Log.e("SLIKA", "Nepoznata putanja: " + putanjaSlike);
+        }
+
+        if (imageUri != null) {
+            imageView.setImageURI(imageUri);
+        } else {
+            Log.e("SLIKA", "URI nije pronađen za putanju: " + putanjaSlike);
+        }
+    }
+
+
+
+
     // Metoda za provjeru i zahtjev za dozvolu kamere
     private void checkCameraPermissionAndScan() {
         if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.CAMERA)
@@ -235,9 +321,9 @@ public class AddOsnovnoSredstvoFragment extends Fragment {
         scanLauncher.launch(options);
     }
 
-
     private void openGallery() {
         Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
         galleryLauncher.launch(intent);
     }
 
@@ -255,11 +341,17 @@ public class AddOsnovnoSredstvoFragment extends Fragment {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         File photoFile = createImageFile(); // Kreiraj fajl za sliku
         if (photoFile != null) {
-            imageUri = Uri.fromFile(photoFile);
+            // Use FileProvider to get a content URI
+            imageUri = FileProvider.getUriForFile(requireContext(),
+                    requireContext().getPackageName() + ".fileprovider",
+                    photoFile);
             intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
+            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
             cameraLauncher.launch(intent);
         }
     }
+
+
 
     private File createImageFile() {
         // Kreiraj fajl gdje će slika biti snimljena
@@ -270,17 +362,22 @@ public class AddOsnovnoSredstvoFragment extends Fragment {
     // Launcher za upload iz galerije
     private final ActivityResultLauncher<Intent> galleryLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(), result -> {
-                if (result.getResultCode() == getActivity().RESULT_OK && result.getData() != null) {
+                if (result.getResultCode() == Activity.RESULT_OK && result.getData() != null) {
                     Uri selectedImageUri = result.getData().getData();
-                    imageView.setImageURI(selectedImageUri);
+                    if (selectedImageUri != null) {
+                        imageView.setImageURI(selectedImageUri);
+                        osnovnoSredstvo.setSlika(selectedImageUri.getPath());
+                    }
                 }
             });
+
 
     // Launcher za slikanje kamerom
     private final ActivityResultLauncher<Intent> cameraLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(), result -> {
                 if (result.getResultCode() == getActivity().RESULT_OK) {
                     imageView.setImageURI(imageUri); // Postavi sliku u ImageView
+                    osnovnoSredstvo.setSlika(imageUri.getPath());
                 }
             });
 

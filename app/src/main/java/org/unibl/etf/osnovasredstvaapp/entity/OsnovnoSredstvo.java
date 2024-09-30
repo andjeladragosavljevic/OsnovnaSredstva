@@ -4,6 +4,8 @@ import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
+import java.io.Serializable;
+
 @Entity(tableName = "osnovna_sredstva",
         foreignKeys = {
                 @ForeignKey(entity = Zaposleni.class, parentColumns = "id", childColumns = "zaduzenaOsobaId"),
@@ -11,13 +13,13 @@ import androidx.room.PrimaryKey;
         }
 )
 
-public class OsnovnoSredstvo {
+public class OsnovnoSredstvo implements Serializable {
    @PrimaryKey(autoGenerate = true)
     private int id;
 
    private String naziv;
    private String opis;
-   private int barkod;
+   private String barkod;
    private double cijena;
    private String datumKreiranja;
    private int zaduzenaOsobaId;
@@ -48,11 +50,11 @@ public class OsnovnoSredstvo {
         this.opis = opis;
     }
 
-    public int getBarkod() {
+    public String getBarkod() {
         return barkod;
     }
 
-    public void setBarkod(int barkod) {
+    public void setBarkod(String barkod) {
         this.barkod = barkod;
     }
 

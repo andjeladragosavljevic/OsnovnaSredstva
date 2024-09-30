@@ -1,0 +1,7 @@
+<paths xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Ovo omogućava pristup slikama snimljenim kamerom -->
+    <external-path name="camera_pictures" path="DCIM/Camera/" />
+
+    <!-- Ovo omogućava pristup fajlovima koje aplikacija čuva -->
+    <external-files-path name="external_files" path="." />
+</paths>

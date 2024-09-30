@@ -11,6 +11,8 @@ public class Lokacija implements Serializable {
     private int id;
     private String grad;
     private String adresa;
+    private String longitude;
+    private String latitude;
 
     public int getId() {
         return id;
@@ -34,5 +36,21 @@ public class Lokacija implements Serializable {
 
     public void setAdresa(String adresa) {
         this.adresa = adresa;
+    }
+
+    public String getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(String longitude) {
+        this.longitude = longitude;
+    }
+
+    public String getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(String latitude) {
+        this.latitude = latitude;
     }
 }

@@ -1,35 +1,23 @@
 package org.unibl.etf.osnovasredstvaapp.ui.zaposleni;
 
 import android.content.Context;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
+
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import org.unibl.etf.osnovasredstvaapp.R;
-import org.unibl.etf.osnovasredstvaapp.dao.OsnovnoSredstvoDao;
 import org.unibl.etf.osnovasredstvaapp.dao.ZaposleniDao;
 import org.unibl.etf.osnovasredstvaapp.database.AppDatabase;
-import org.unibl.etf.osnovasredstvaapp.entity.OsnovnoSredstvo;
 import org.unibl.etf.osnovasredstvaapp.entity.Zaposleni;
-import org.unibl.etf.osnovasredstvaapp.ui.osnovnosredstvo.OsnovnoSredstvoRecyclerViewAdapter;
-import org.unibl.etf.osnovasredstvaapp.ui.osnovnosredstvo.OsnovnoSredstvoTask;
-import org.unibl.etf.osnovasredstvaapp.ui.zaposleni.placeholder.PlaceholderContent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,7 +28,6 @@ import java.util.List;
 public class ZaposleniFragment extends Fragment {
     private RecyclerView recyclerView;
     private ZaposleniRecyclerViewAdapter adapter;
-    private ZaposleniDao zaposleniDao;
     private TextView emptyView;
 
     // TODO: Customize parameter argument names
@@ -94,7 +81,7 @@ public class ZaposleniFragment extends Fragment {
         recyclerView.setAdapter(adapter);
 
         // Inicijalizacija Room baze i DAO-a
-        zaposleniDao = AppDatabase.getInstance(getContext()).zaposleniDao();
+        ZaposleniDao zaposleniDao = AppDatabase.getInstance(getContext()).zaposleniDao();
 
         // Pokretanje AsyncTask-a za dohvatanje podataka
         new ZaposleniTask(this, zaposleniDao).execute();
@@ -104,21 +91,9 @@ public class ZaposleniFragment extends Fragment {
     }
 
 
-
-
-    private void deleteZaposleni(Zaposleni zaposleni) {
-        new ZaposleniTask(null, zaposleniDao, ZaposleniTask.OperationType.DELETE, zaposleni).execute();
-
-    }
-
-    private void updateZaposleni(Zaposleni zaposleni) {
-        // Logika za otvaranje ekrana za ažuriranje
-    }
-
     // Metoda za ažuriranje RecyclerView-a sa podacima iz baze
     public void updateList(List<Zaposleni> zaposleni) {
-        Log.i("ZAPOSLENI ", zaposleni.toString());
-        if (zaposleni == null || zaposleni.isEmpty()) {
+        if (zaposleni.isEmpty()) {
             // Ako nema podataka, prikaži poruku
             recyclerView.setVisibility(View.GONE);
             emptyView.setVisibility(View.VISIBLE);
