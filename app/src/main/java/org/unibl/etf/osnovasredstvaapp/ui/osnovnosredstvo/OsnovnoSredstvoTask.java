@@ -11,8 +11,9 @@ import java.util.List;
 
 public class OsnovnoSredstvoTask extends AsyncTask<Void, Void, List<OsnovnoSredstvo>> {
     private int lokacijaId;
-    private String locationFilter;
-    private String nameFilter;
+
+    private String nazivFilter;
+    private String barkodFilter;
 
     public enum OperationType {
         INSERT, UPDATE, DELETE, READ, GETBYLOCATIONID, FILTER
@@ -23,12 +24,15 @@ public class OsnovnoSredstvoTask extends AsyncTask<Void, Void, List<OsnovnoSreds
     private OperationType operationType;
     private OsnovnoSredstvo osnovnoSredstvo;
 
-    public OsnovnoSredstvoTask(OsnovnoSredstvoFragment fragment, OsnovnoSredstvoDao dao, String nameFilter) {
+    // Konstruktor za filtriranje
+    public OsnovnoSredstvoTask(OsnovnoSredstvoFragment fragment, OsnovnoSredstvoDao dao, String nazivFilter, String barkodFilter) {
         this.fragmentReference = new WeakReference<>(fragment);
         this.osnovnoSredstvoDao = dao;
-        this.nameFilter = nameFilter;
+        this.nazivFilter = nazivFilter;
+        this.barkodFilter = barkodFilter;
         this.operationType = OperationType.FILTER;
     }
+
     public OsnovnoSredstvoTask(OsnovnoSredstvoFragment fragment, OsnovnoSredstvoDao osnovnoSredstvoDao,  OperationType operationType, int lokacijaId) {
         this.fragmentReference = new WeakReference<>(fragment);
         this.osnovnoSredstvoDao = osnovnoSredstvoDao;
@@ -53,17 +57,18 @@ public class OsnovnoSredstvoTask extends AsyncTask<Void, Void, List<OsnovnoSreds
 
     @Override
     protected List<OsnovnoSredstvo> doInBackground(Void... voids) {
-        Log.d("OsnovnoSredstvoTask", "Operation: " + operationType);
 
         switch (operationType) {
-            case FILTER: {
-                   if (!nameFilter.isEmpty()) {
-                        return osnovnoSredstvoDao.filterByName(nameFilter);
-                    } else {
-                        return osnovnoSredstvoDao.getAll();
-                    }
-
-            }
+            case FILTER:
+                if (!nazivFilter.isEmpty() && !barkodFilter.isEmpty()) {
+                    return osnovnoSredstvoDao.filterByNazivAndBarkod(nazivFilter, barkodFilter);
+                } else if (!nazivFilter.isEmpty()) {
+                    return osnovnoSredstvoDao.filterByName(nazivFilter);
+                } else if (!barkodFilter.isEmpty()) {
+                    return osnovnoSredstvoDao.filterByBarkod(barkodFilter);
+                } else {
+                    return osnovnoSredstvoDao.getAll();
+                }
             case INSERT: {
                 try {
                     osnovnoSredstvoDao.insert(osnovnoSredstvo);

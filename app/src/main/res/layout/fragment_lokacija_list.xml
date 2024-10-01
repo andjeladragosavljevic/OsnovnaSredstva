@@ -6,13 +6,84 @@
     android:layout_height="match_parent"
     tools:context=".ui.zaposleni.ZaposleniFragment">
 
-<androidx.recyclerview.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    <!-- MaterialCardView for expandable search -->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/searchCard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="4dp"
+        android:layout_margin="16dp"
+        android:visibility="visible"
+        app:cardCornerRadius="8dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- Header with Expand/Collapse icon -->
+            <LinearLayout
+                android:id="@+id/expansionHeader"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <!-- Title of the section -->
+                <TextView
+                    android:id="@+id/sectionTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Search Options"
+                    android:textStyle="bold"
+                    android:textSize="16sp" />
+
+                <!-- Icon to expand/collapse -->
+                <ImageView
+                    android:id="@+id/expandCollapseIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_expand_more" />
+            </LinearLayout>
+
+            <!-- Expandable content, hidden by default -->
+            <LinearLayout
+                android:id="@+id/expansionContent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone"
+                android:layout_marginTop="8dp">
+
+                <!-- SearchView for searching by name -->
+                <SearchView
+                    android:id="@+id/searchViewGrad"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:queryHint="Search by name"
+                    android:iconifiedByDefault="false" />
+
+                <!-- SearchView for searching by barkod -->
+                <SearchView
+                    android:id="@+id/searchViewAdresa"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:queryHint="Search by barkod"
+                    android:layout_marginTop="8dp"
+                    android:iconifiedByDefault="false" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+<androidx.recyclerview.widget.RecyclerView
     android:id="@+id/list"
     android:name="org.unibl.etf.osnovasredstvaapp.ui.lokacija.LokacijaFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_below="@id/searchCard"
     android:layout_marginLeft="16dp"
     android:layout_marginRight="16dp"
     app:layoutManager="LinearLayoutManager"

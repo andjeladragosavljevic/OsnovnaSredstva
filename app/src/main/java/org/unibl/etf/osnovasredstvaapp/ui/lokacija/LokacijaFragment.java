@@ -12,7 +12,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.RotateAnimation;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.SearchView;
 import android.widget.TextView;
+
+import com.google.android.material.card.MaterialCardView;
 
 import org.unibl.etf.osnovasredstvaapp.R;
 import org.unibl.etf.osnovasredstvaapp.dao.LokacijaDao;
@@ -21,6 +28,7 @@ import org.unibl.etf.osnovasredstvaapp.database.AppDatabase;
 import org.unibl.etf.osnovasredstvaapp.entity.Lokacija;
 import org.unibl.etf.osnovasredstvaapp.entity.Zaposleni;
 import org.unibl.etf.osnovasredstvaapp.ui.lokacija.placeholder.PlaceholderContent;
+import org.unibl.etf.osnovasredstvaapp.ui.osnovnosredstvo.OsnovnoSredstvoTask;
 import org.unibl.etf.osnovasredstvaapp.ui.zaposleni.ZaposleniRecyclerViewAdapter;
 import org.unibl.etf.osnovasredstvaapp.ui.zaposleni.ZaposleniTask;
 
@@ -31,6 +39,12 @@ import java.util.List;
  * A fragment representing a list of Items.
  */
 public class LokacijaFragment extends Fragment {
+    private MaterialCardView searchCard;
+    private LinearLayout expansionContent;
+    private ImageView expandCollapseIcon;
+    private boolean isExpanded = false;
+    private SearchView searchViewGrad, searchViewAdresa;
+
     private RecyclerView recyclerView;
     private LokacijaRecyclerViewAdapter adapter;
     private LokacijaDao lokacijaDao;
@@ -67,11 +81,74 @@ public class LokacijaFragment extends Fragment {
         }
     }
 
+    // Method to toggle expansion/collapse
+    private void toggleExpansion() {
+        if (isExpanded) {
+            // Collapse content
+            expansionContent.setVisibility(View.GONE);
+            rotateIcon(180, 0); // Rotate back to original position
+        } else {
+            // Expand content
+            expansionContent.setVisibility(View.VISIBLE);
+            rotateIcon(0, 180); // Rotate downwards
+        }
+        isExpanded = !isExpanded;
+    }
+
+    // Optional: Rotate the expand/collapse icon
+    private void rotateIcon(float from, float to) {
+        RotateAnimation rotate = new RotateAnimation(from, to,
+                Animation.RELATIVE_TO_SELF, 0.5f,
+                Animation.RELATIVE_TO_SELF, 0.5f);
+        rotate.setDuration(300);
+        rotate.setFillAfter(true);
+        expandCollapseIcon.startAnimation(rotate);
+    }
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_lokacija_list, container, false);
         emptyView = view.findViewById(R.id.empty_view);
+
+        searchCard = view.findViewById(R.id.searchCard);
+        expansionContent = view.findViewById(R.id.expansionContent);
+        expandCollapseIcon = view.findViewById(R.id.expandCollapseIcon);
+
+        // Set click listener for header to toggle expansion/collapse
+        searchCard.findViewById(R.id.expansionHeader).setOnClickListener(v -> toggleExpansion());
+        // Pretraga po nazivu
+        searchViewGrad = view.findViewById(R.id.searchViewGrad);
+        searchViewGrad.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                filterLokacija(query, searchViewAdresa.getQuery().toString());  // Filtriraj po oba kriterijuma
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                filterLokacija(newText, searchViewAdresa.getQuery().toString());  // Filtriraj po oba kriterijuma
+                return true;
+            }
+        });
+
+        // Pretraga po barkodu
+        searchViewAdresa = view.findViewById(R.id.searchViewAdresa);
+        searchViewAdresa.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                filterLokacija(searchViewGrad.getQuery().toString(), query);  // Filtriraj po oba kriterijuma
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                filterLokacija(searchViewGrad.getQuery().toString(), newText);  // Filtriraj po oba kriterijuma
+                return true;
+            }
+        });
 
         // Set the adapter
         Context context = getContext();
@@ -94,6 +171,11 @@ public class LokacijaFragment extends Fragment {
 
         return view;
     }
+
+    private void filterLokacija(String grad, String adresa) {
+        new LokacijaTask(this, lokacijaDao, grad, adresa).execute();  // Poziv AsyncTask-a za filtriranje
+    }
+
 
     public void updateList(List<Lokacija> lokacije) {
         if (lokacije == null || lokacije.isEmpty()) {

@@ -32,11 +32,13 @@ public interface OsnovnoSredstvoDao {
     List<OsnovnoSredstvo> getOsnovnaSredstvaByLokacijaId(int lokacijaId);
 
 
-    // Filtriranje po imenu
-    @Query("SELECT * FROM osnovna_sredstva WHERE naziv LIKE '%' || :name || '%'")
-    List<OsnovnoSredstvo> filterByName(String name);
+    @Query("SELECT * FROM osnovna_sredstva WHERE naziv LIKE '%' || :naziv || '%'")
+    List<OsnovnoSredstvo> filterByName(String naziv);
 
-    // Filtriranje po lokaciji i imenu
-    @Query("SELECT * FROM osnovna_sredstva WHERE zaduzenaLokacijaId = :lokacijaId AND naziv LIKE '%' || :name || '%'")
-    List<OsnovnoSredstvo> filterByLocationAndName(int lokacijaId, String name);
+    @Query("SELECT * FROM osnovna_sredstva WHERE barkod LIKE '%' || :barkod || '%'")
+    List<OsnovnoSredstvo> filterByBarkod(String barkod);
+
+    @Query("SELECT * FROM osnovna_sredstva WHERE naziv LIKE '%' || :naziv || '%' AND barkod LIKE '%' || :barkod || '%'")
+    List<OsnovnoSredstvo> filterByNazivAndBarkod(String naziv, String barkod);
+
 }

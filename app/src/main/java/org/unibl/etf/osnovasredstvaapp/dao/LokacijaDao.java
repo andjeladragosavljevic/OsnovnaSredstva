@@ -8,6 +8,7 @@ import androidx.room.Update;
 
 
 import org.unibl.etf.osnovasredstvaapp.entity.Lokacija;
+import org.unibl.etf.osnovasredstvaapp.entity.OsnovnoSredstvo;
 
 import java.util.List;
 
@@ -27,4 +28,14 @@ public interface LokacijaDao {
 
     @Query("SELECT * FROM lokacija")
     List<Lokacija> getAll();
+
+    @Query("SELECT * FROM lokacija WHERE grad LIKE '%' || :grad || '%'")
+    List<Lokacija> filterByGrad(String grad);
+
+    @Query("SELECT * FROM lokacija WHERE adresa LIKE '%' || :adresa || '%'")
+    List<Lokacija> filterByAdresa(String adresa);
+
+    @Query("SELECT * FROM lokacija WHERE grad LIKE '%' || :grad || '%' AND adresa LIKE '%' || :adresa || '%'")
+    List<Lokacija> filterByGradAndAdresa(String grad, String adresa);
+
 }
