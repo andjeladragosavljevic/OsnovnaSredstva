@@ -1,5 +1,6 @@
 package org.unibl.etf.osnovasredstvaapp.entity;
 
+import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
@@ -24,7 +25,7 @@ public class OsnovnoSredstvo implements Serializable {
    private String datumKreiranja;
    private int zaduzenaOsobaId;
    private int zaduzenaLokacijaId;
-   private String slika;
+    private String slikaPath;
 
     public int getId() {
         return id;
@@ -90,11 +91,11 @@ public class OsnovnoSredstvo implements Serializable {
         this.zaduzenaLokacijaId = zaduzenaLokacijaId;
     }
 
-    public String getSlika() {
-        return slika;
+    public String getSlikaPath() {
+        return slikaPath;
     }
 
-    public void setSlika(String slika) {
-        this.slika = slika;
+    public void setSlikaPath(String slikaPath) {
+        this.slikaPath = slikaPath;
     }
 }

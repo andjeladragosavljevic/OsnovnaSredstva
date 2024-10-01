@@ -1,6 +1,8 @@
 package org.unibl.etf.osnovasredstvaapp.ui.osnovnosredstvo;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -26,6 +28,7 @@ import org.unibl.etf.osnovasredstvaapp.database.AppDatabase;
 import org.unibl.etf.osnovasredstvaapp.entity.OsnovnoSredstvo;
 import org.unibl.etf.osnovasredstvaapp.ui.osnovnosredstvo.placeholder.PlaceholderContent;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -79,7 +82,6 @@ public class OsnovnoSredstvoFragment extends Fragment {
         emptyView = view.findViewById(R.id.empty_view);
 
 
-
         // Set the adapter
         Context context = getContext();
 
@@ -112,7 +114,6 @@ public class OsnovnoSredstvoFragment extends Fragment {
             // Pokretanje AsyncTask-a za dohvatanje svih podataka
             new OsnovnoSredstvoTask(this, osnovnoSredstvoDao).execute();
         }
-
 
         return view;
     }
@@ -168,8 +169,6 @@ public class OsnovnoSredstvoFragment extends Fragment {
 
     public void filterByLocation(int lokacijaId) {
         new OsnovnoSredstvoTask(this, osnovnoSredstvoDao, OsnovnoSredstvoTask.OperationType.GETBYLOCATIONID, lokacijaId).execute();
-
-
     }
 
 }
