@@ -125,7 +125,8 @@ public class MainActivity extends AppCompatActivity {
         navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
             if (destination.getId() == R.id.add_osnovno_sredstvo_fragment || destination.getId() == R.id.nav_add_zaposleni
                     || destination.getId() == R.id.nav_add_lokacija || destination.getId() == R.id.nav_details
-        || destination.getId() == R.id.add_popisna_lista) {
+        || destination.getId() == R.id.add_popisna_lista
+        || destination.getId() == R.id.nav_popisna_stavka_list) {
                 binding.appBarMain.fab.setVisibility(View.GONE);
             } else {
                 binding.appBarMain.fab.setVisibility(View.VISIBLE);

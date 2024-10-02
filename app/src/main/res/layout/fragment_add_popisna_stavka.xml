@@ -6,87 +6,40 @@
     android:orientation="vertical"
     android:padding="16dp">
 
-    <!-- Polje za unos osnovnog sredstva -->
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Osnovno sredstvo"
-        android:textSize="16sp" />
-
-    <EditText
+    <AutoCompleteTextView
         android:id="@+id/osnovnoSredstvoEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Unesite osnovno sredstvo"
-        android:inputType="text"
-        android:enabled="false" />
-
-    <!-- Polje za trenutnu osobu -->
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Trenutna osoba"
-        android:textSize="16sp"
-        android:layout_marginTop="16dp" />
+        android:hint="Osnovno sredstvo" />
 
     <EditText
         android:id="@+id/trenutnaOsobaEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Unesite trenutnu osobu"
-        android:inputType="text" />
+        android:hint="Trenutna osoba"
+       />
 
-    <!-- Polje za novu osobu -->
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Nova osoba"
-        android:textSize="16sp"
-        android:layout_marginTop="16dp" />
-
-    <EditText
+    <AutoCompleteTextView
         android:id="@+id/novaOsobaEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Unesite novu osobu"
-        android:inputType="text" />
-
-    <!-- Polje za trenutnu lokaciju -->
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Trenutna lokacija"
-        android:textSize="16sp"
-        android:layout_marginTop="16dp" />
+        android:hint="Nova osoba" />
 
     <EditText
         android:id="@+id/trenutnaLokacijaEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Unesite trenutnu lokaciju"
-        android:inputType="text" />
+        android:hint="Trenutna lokacija" />
 
-    <!-- Polje za novu lokaciju -->
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Nova lokacija"
-        android:textSize="16sp"
-        android:layout_marginTop="16dp" />
-
-    <EditText
+    <AutoCompleteTextView
         android:id="@+id/novaLokacijaEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Unesite novu lokaciju"
-        android:inputType="text" />
+        android:hint="Nova lokacija" />
 
-    <!-- Dugme za snimanje stavke -->
     <Button
         android:id="@+id/saveStavkaButton"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Sačuvaj stavku"
-        android:layout_marginTop="24dp" />
-
+        android:text="Sačuvaj stavku" />
 </LinearLayout>

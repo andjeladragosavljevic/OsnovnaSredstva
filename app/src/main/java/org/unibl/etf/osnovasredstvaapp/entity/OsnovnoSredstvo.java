@@ -9,8 +9,8 @@ import java.io.Serializable;
 
 @Entity(tableName = "osnovna_sredstva",
         foreignKeys = {
-                @ForeignKey(entity = Zaposleni.class, parentColumns = "id", childColumns = "zaduzenaOsobaId"),
-                @ForeignKey(entity = Lokacija.class, parentColumns = "id", childColumns = "zaduzenaLokacijaId")
+                @ForeignKey(entity = Zaposleni.class, parentColumns = "id", childColumns = "zaduzenaOsobaId", onDelete = ForeignKey.CASCADE),
+                @ForeignKey(entity = Lokacija.class, parentColumns = "id", childColumns = "zaduzenaLokacijaId", onDelete = ForeignKey.CASCADE)
         }
 )
 

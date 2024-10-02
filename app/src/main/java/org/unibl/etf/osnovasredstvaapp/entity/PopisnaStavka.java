@@ -4,17 +4,20 @@ import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
+import java.io.Serial;
+import java.io.Serializable;
+
 @Entity(tableName = "popisna_stavka",
         foreignKeys = {
-        @ForeignKey(entity = OsnovnoSredstvo.class, parentColumns = "id", childColumns = "osnovnoSredstvoId"),
-                @ForeignKey(entity = Zaposleni.class, parentColumns = "id", childColumns = "trenutnaOsobaId"),
-                @ForeignKey(entity = Zaposleni.class, parentColumns = "id", childColumns = "novaOsobaId"),
-                @ForeignKey(entity = Lokacija.class, parentColumns = "id", childColumns = "trenutnaLokacijaId"),
-                @ForeignKey(entity = Lokacija.class, parentColumns = "id", childColumns = "novaLokacijaId"),
+        @ForeignKey(entity = OsnovnoSredstvo.class, parentColumns = "id", childColumns = "osnovnoSredstvoId", onDelete = ForeignKey.CASCADE),
+                @ForeignKey(entity = Zaposleni.class, parentColumns = "id", childColumns = "trenutnaOsobaId", onDelete = ForeignKey.CASCADE),
+                @ForeignKey(entity = Zaposleni.class, parentColumns = "id", childColumns = "novaOsobaId", onDelete = ForeignKey.CASCADE),
+                @ForeignKey(entity = Lokacija.class, parentColumns = "id", childColumns = "trenutnaLokacijaId", onDelete = ForeignKey.CASCADE),
+                @ForeignKey(entity = Lokacija.class, parentColumns = "id", childColumns = "novaLokacijaId", onDelete = ForeignKey.CASCADE),
                 @ForeignKey(entity = PopisnaLista.class, parentColumns = "id", childColumns = "popisnaListaId",  onDelete = ForeignKey.CASCADE)
         }
 )
-public class PopisnaStavka {
+public class PopisnaStavka implements Serializable {
     @PrimaryKey(autoGenerate = true)
     private int id;
     private int osnovnoSredstvoId;

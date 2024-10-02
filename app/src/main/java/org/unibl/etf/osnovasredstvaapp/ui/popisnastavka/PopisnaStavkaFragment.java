@@ -21,7 +21,9 @@ import android.widget.TextView;
 import org.unibl.etf.osnovasredstvaapp.R;
 import org.unibl.etf.osnovasredstvaapp.dao.PopisnaStavkaDao;
 import org.unibl.etf.osnovasredstvaapp.database.AppDatabase;
+import org.unibl.etf.osnovasredstvaapp.entity.OsnovnoSredstvo;
 import org.unibl.etf.osnovasredstvaapp.entity.PopisnaStavka;
+import org.unibl.etf.osnovasredstvaapp.ui.osnovnosredstvo.OsnovnoSredstvoRecyclerViewAdapter;
 import org.unibl.etf.osnovasredstvaapp.ui.popisnastavka.placeholder.PlaceholderContent;
 import org.unibl.etf.osnovasredstvaapp.ui.zaposleni.ZaposleniRecyclerViewAdapter;
 
@@ -73,10 +75,13 @@ public class PopisnaStavkaFragment extends Fragment {
             emptyView.setVisibility(View.VISIBLE);
             stavkeRecyclerView.setVisibility(View.GONE);
         } else {
+            DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(stavkeRecyclerView.getContext(), LinearLayoutManager.VERTICAL);
+            stavkeRecyclerView.addItemDecoration(dividerItemDecoration);
             emptyView.setVisibility(View.GONE);
             stavkeRecyclerView.setVisibility(View.VISIBLE);
             adapter = new PopisnaStavkaRecyclerViewAdapter(stavke, getContext());
             stavkeRecyclerView.setAdapter(adapter);
+
         }
 
         // Klik za dodavanje stavke skeniranjem barkoda
@@ -103,4 +108,24 @@ public class PopisnaStavkaFragment extends Fragment {
         NavController navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment_content_main);
         navController.navigate(R.id.add_popisna_stavka_fragment, args);
     }
+
+    public void updateList(List<PopisnaStavka> popisneStavke) {
+        if (popisneStavke == null || popisneStavke.isEmpty()) {
+            // Ako nema podataka, prikaži poruku
+            stavkeRecyclerView.setVisibility(View.GONE);
+            emptyView.setVisibility(View.VISIBLE);
+        } else {
+            // Ako ima podataka, sakrij poruku i prikaži listu
+            stavkeRecyclerView.setVisibility(View.VISIBLE);
+            emptyView.setVisibility(View.GONE);
+
+            if (adapter == null) {
+                adapter = new PopisnaStavkaRecyclerViewAdapter(popisneStavke, getContext());
+                stavkeRecyclerView.setAdapter(adapter);
+            } else {
+                adapter.updateData(popisneStavke);
+            }
+        }
+    }
+
 }
