@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".ui.zaposleni.ZaposleniFragment">
 
+    <!-- MaterialCardView for expandable search -->
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/searchCard"
         style="@style/ExpandablePanelStyle">
@@ -38,32 +39,36 @@
                 android:id="@+id/expansionContent"
                 style="@style/ExpansionContentStyle">
 
-                <SearchView
-                    android:id="@+id/searchViewGrad"
-                    style="@style/SearchViewStyle"
-                    android:queryHint="@string/pretrazi_po_gradu" />
 
                 <SearchView
-                    android:id="@+id/searchViewAdresa"
+                    android:id="@+id/searchViewNaziv"
                     style="@style/SearchViewStyle"
-                    android:queryHint="@string/pretrazi_po_adresi"
+                    android:queryHint="@string/pretrazi_po_nazivu" />
+
+
+                <SearchView
+                    android:id="@+id/searchViewDatum"
+                    style="@style/SearchViewStyle"
+                    android:queryHint="@string/pretrazi_po_datumu"
                     android:layout_marginTop="8dp" />
             </LinearLayout>
 
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
 
-<androidx.recyclerview.widget.RecyclerView
-    android:id="@+id/list"
-    android:name="org.unibl.etf.osnovasredstvaapp.ui.lokacija.LokacijaFragment"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_below="@id/searchCard"
-    android:layout_marginLeft="16dp"
-    android:layout_marginRight="16dp"
-    app:layoutManager="LinearLayoutManager"
-    tools:context=".ui.lokacija.LokacijaFragment"
-    tools:listitem="@layout/fragment_lokacija" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/list"
+        android:name="org.unibl.etf.osnovasredstvaapp.ui.popisnalista.PopisnaListaFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/searchCard"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        app:layoutManager="LinearLayoutManager"
+        tools:context=".ui.popisnalista.PopisnaListaFragment"
+        tools:listitem="@layout/fragment_popisna_lista" />
+
 
     <TextView
         android:id="@+id/empty_view"

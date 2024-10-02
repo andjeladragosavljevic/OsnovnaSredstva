@@ -41,4 +41,8 @@ public interface OsnovnoSredstvoDao {
     @Query("SELECT * FROM osnovna_sredstva WHERE naziv LIKE '%' || :naziv || '%' AND barkod LIKE '%' || :barkod || '%'")
     List<OsnovnoSredstvo> filterByNazivAndBarkod(String naziv, String barkod);
 
+    @Query("SELECT * FROM osnovna_sredstva WHERE barkod = :barkod")
+    OsnovnoSredstvo getByBarkod(String barkod);
+
+
 }

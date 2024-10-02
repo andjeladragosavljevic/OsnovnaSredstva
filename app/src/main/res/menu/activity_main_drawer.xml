@@ -21,7 +21,7 @@
             android:icon="@drawable/ic_location"
             android:title="Lokacije"/>
         <item
-            android:id="@+id/nav_popisne_liste"
+            android:id="@+id/nav_popisna_lista"
             android:icon="@drawable/ic_list"
             android:title="Popisne liste"/>
 

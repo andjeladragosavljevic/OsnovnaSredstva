@@ -8,13 +8,14 @@ import androidx.room.Update;
 
 
 import org.unibl.etf.osnovasredstvaapp.entity.PopisnaLista;
+import org.unibl.etf.osnovasredstvaapp.entity.Zaposleni;
 
 import java.util.List;
 
 @Dao
 public interface PopisnaListaDao {
     @Insert
-    void insert(PopisnaLista popisnaLista);
+    long insert(PopisnaLista popisnaLista);
 
     @Update
     void update(PopisnaLista popisnaLista);
@@ -27,5 +28,15 @@ public interface PopisnaListaDao {
 
     @Query("SELECT * FROM popisna_lista")
     List<PopisnaLista> getAll();
+
+    @Query("SELECT * FROM popisna_lista WHERE naziv LIKE '%' || :naziv || '%'")
+    List<PopisnaLista> filterByName(String naziv);
+
+    @Query("SELECT * FROM popisna_lista WHERE datumKreiranja = :date")
+    List<PopisnaLista> filterByDate(String date);
+
+    @Query("SELECT * FROM popisna_lista WHERE naziv LIKE '%' || :name || '%' AND datumKreiranja = :date")
+    List<PopisnaLista> filterByNameAndDate(String name, String date);
+
 
 }

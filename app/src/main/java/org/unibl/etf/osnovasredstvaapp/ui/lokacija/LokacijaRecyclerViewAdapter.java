@@ -33,12 +33,13 @@ public class LokacijaRecyclerViewAdapter extends RecyclerView.Adapter<LokacijaRe
 
     private List<Lokacija> lokacije;
     private Context context;
-    LokacijaDao lokacijaDao = AppDatabase.getInstance(context).lokacijaDao();
-
+    LokacijaDao lokacijaDao ;
     public LokacijaRecyclerViewAdapter(List<Lokacija> items, Context context)
     {
         lokacije = items;
         this.context = context;
+        lokacijaDao = AppDatabase.getInstance(context).lokacijaDao();
+
     }
 
     @Override

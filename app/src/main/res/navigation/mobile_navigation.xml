@@ -83,7 +83,47 @@
         android:label="Lokacija"
         tools:layout="@layout/fragment_osnovno_sredstvo" />
 
+    <fragment
+        android:id="@+id/nav_popisna_lista"
+        android:name="org.unibl.etf.osnovasredstvaapp.ui.popisnalista.PopisnaListaFragment"
+        android:label="@string/nova_lokacija"
+        tools:layout="@layout/fragment_popisna_lista_list" >
+        <action
+            android:id="@+id/action_nav_popisna_lista_to_add_popisna_lista"
+            app:destination="@id/add_popisna_lista"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim" />
+        <action
+            android:id="@+id/action_nav_popisna_lista_to_nav_popisna_stavka_list"
+            app:destination="@id/nav_popisna_stavka_list"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim" />
+    </fragment>
 
+    <fragment
+        android:id="@+id/add_popisna_lista"
+        android:name="org.unibl.etf.osnovasredstvaapp.ui.popisnalista.AddPopisnaListaFragment"
+        android:label="@string/novo_osnovno_sredstvo"
+        tools:layout="@layout/fragment_add_popisna_lista" />
+
+    <fragment
+        android:id="@+id/nav_popisna_stavka_list"
+        android:name="org.unibl.etf.osnovasredstvaapp.ui.popisnastavka.PopisnaStavkaFragment"
+        android:label="@string/novo_osnovno_sredstvo"
+        tools:layout="@layout/fragment_popisna_stavka_list" >
+        <action
+            android:id="@+id/action_nav_popisna_stavka_list_to_add_popisna_stavka"
+            app:destination="@id/add_popisna_stavka_fragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim" />
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/add_popisna_stavka_fragment"
+        android:name="org.unibl.etf.osnovasredstvaapp.ui.popisnastavka.AddPopisnaStavkaFragment"
+        android:label="@string/novo_osnovno_sredstvo"
+        tools:layout="@layout/fragment_add_popisna_stavka" />
 
 
 </navigation>

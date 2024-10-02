@@ -31,4 +31,7 @@ public interface PopisnaStavkaDao {
     @Query("SELECT * FROM popisna_stavka WHERE popisnaListaId = :listaId")
     List<PopisnaStavka> getStavkeListe(int listaId);
 
+    @Query("SELECT * FROM popisna_stavka WHERE popisnaListaId = :popisnaListaId")
+    List<PopisnaStavka> getByPopisnaListaId(int popisnaListaId);
+
 }

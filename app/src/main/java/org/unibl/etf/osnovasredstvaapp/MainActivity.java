@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
             // Kreirajte Bundle sa argumentima
             Bundle args = new Bundle();
             args.putInt("LOKACIJA_ID", lokacijaId);
-            Log.d("BLA", lokacijaId+"");
+
 
             // Navigirajte ka `OsnovnoSredstvoFragment` unutar NavHost-a
             navController.navigate(R.id.action_nav_osnovno_sredsvo_to_nav_osnovno_sredsvo_fragment, args);
@@ -90,6 +90,16 @@ public class MainActivity extends AppCompatActivity {
                     navController.navigate(R.id.action_nav_lokacije_to_nav_add_lokacija);
 
                 }
+                else if(currentDestinationId == R.id.nav_popisna_lista){
+
+                    navController.navigate(R.id.action_nav_popisna_lista_to_add_popisna_lista);
+
+                }
+                else if(currentDestinationId == R.id.nav_popisna_stavka_list){
+
+                    navController.navigate(R.id.action_nav_popisna_stavka_list_to_add_popisna_stavka);
+
+                }
                  else {
                         Snackbar.make(view, "Nema fragmenta za dodavanje podataka", Snackbar.LENGTH_LONG)
                                 .setAction("Action", null)
@@ -105,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                 R.id.nav_osnovno_sredsvo, R.id.nav_zaposleni, R.id.nav_lokacije)
+                 R.id.nav_osnovno_sredsvo, R.id.nav_zaposleni, R.id.nav_lokacije, R.id.nav_popisna_lista)
                 .setOpenableLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
@@ -114,7 +124,8 @@ public class MainActivity extends AppCompatActivity {
 
         navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
             if (destination.getId() == R.id.add_osnovno_sredstvo_fragment || destination.getId() == R.id.nav_add_zaposleni
-                    || destination.getId() == R.id.nav_add_lokacija || destination.getId() == R.id.nav_details) {
+                    || destination.getId() == R.id.nav_add_lokacija || destination.getId() == R.id.nav_details
+        || destination.getId() == R.id.add_popisna_lista) {
                 binding.appBarMain.fab.setVisibility(View.GONE);
             } else {
                 binding.appBarMain.fab.setVisibility(View.VISIBLE);

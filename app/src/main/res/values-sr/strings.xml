@@ -22,6 +22,7 @@
     <string name="pretrazi_po_barkodu">Pretraži po barkodu</string>
     <string name="pretrazi_po_imenu">Pretraži po imenu</string>
     <string name="pretrazi_po_prezimenu">Pretraži po prezimenu</string>
+    <string name="pretrazi_po_datumu">Pretraži po datumu</string>
 
     <string name="title_activity_maps">Mapa</string>
 

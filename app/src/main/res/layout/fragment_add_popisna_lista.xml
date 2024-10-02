@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- Naziv popisne liste -->
+    <TextView
+        android:id="@+id/nazivPopisneListeLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Naziv popisne liste"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/nazivListe"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Unesite naziv popisne liste"
+        android:padding="8dp" />
+
+    <!-- Dugme za kreiranje popisne liste -->
+    <Button
+        android:id="@+id/kreirajListuButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Kreiraj popisnu listu"
+        android:layout_marginTop="16dp"
+        android:textSize="16sp" />
+
+
+
+
+</LinearLayout>
+
+    <!--            android:drawableLeft="@drawable/ic_barcode"-->

@@ -22,7 +22,7 @@ import org.unibl.etf.osnovasredstvaapp.entity.PopisnaStavka;
 import org.unibl.etf.osnovasredstvaapp.entity.Zaposleni;
 
 
-@Database(entities = {OsnovnoSredstvo.class, Zaposleni.class, Lokacija.class, PopisnaStavka.class, PopisnaLista.class}, version = 5)
+@Database(entities = {OsnovnoSredstvo.class, Zaposleni.class, Lokacija.class, PopisnaStavka.class, PopisnaLista.class}, version = 7)
 public abstract class AppDatabase extends RoomDatabase {
     private static AppDatabase instance;
 

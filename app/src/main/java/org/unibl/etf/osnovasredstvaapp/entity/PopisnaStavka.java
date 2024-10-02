@@ -11,7 +11,7 @@ import androidx.room.PrimaryKey;
                 @ForeignKey(entity = Zaposleni.class, parentColumns = "id", childColumns = "novaOsobaId"),
                 @ForeignKey(entity = Lokacija.class, parentColumns = "id", childColumns = "trenutnaLokacijaId"),
                 @ForeignKey(entity = Lokacija.class, parentColumns = "id", childColumns = "novaLokacijaId"),
-                @ForeignKey(entity = PopisnaLista.class, parentColumns = "id", childColumns = "popisnaListaId")
+                @ForeignKey(entity = PopisnaLista.class, parentColumns = "id", childColumns = "popisnaListaId",  onDelete = ForeignKey.CASCADE)
         }
 )
 public class PopisnaStavka {

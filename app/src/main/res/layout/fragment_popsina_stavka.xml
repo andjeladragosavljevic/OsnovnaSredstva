@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    <TextView
+        android:id="@+id/textViewNazivOsnovnogSredstva"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Naziv osnovnog sredstva"
+        android:textStyle="bold" />
+
+    <!-- Osoba na kojoj se vodi OS -->
+    <TextView
+        android:id="@+id/textViewTrenutnaOsoba"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Trenutna osoba" />
+
+    <!-- Nova osoba -->
+    <TextView
+        android:id="@+id/textViewNovaOsoba"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nova osoba" />
+
+    <!-- Trenutna lokacija -->
+    <TextView
+        android:id="@+id/textViewTrenutnaLokacija"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Trenutna lokacija" />
+
+    <!-- Nova lokacija -->
+    <TextView
+        android:id="@+id/textViewNovaLokacija"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nova lokacija" />
+</LinearLayout>
