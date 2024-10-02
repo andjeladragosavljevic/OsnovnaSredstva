@@ -1,14 +1,20 @@
 package org.unibl.etf.osnovasredstvaapp;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -18,14 +24,32 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import org.unibl.etf.osnovasredstvaapp.databinding.ActivityMainBinding;
 
-public class MainActivity extends AppCompatActivity {
+import java.util.Locale;
 
+public class MainActivity extends AppCompatActivity {
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityMainBinding binding;
+
+    private SharedPreferences sharedPreferences;
+    private static final String LANGUAGE_PREF = "language_pref";
+    private static final String SELECTED_LANGUAGE = "selected_language";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        sharedPreferences = getSharedPreferences(LANGUAGE_PREF, MODE_PRIVATE);
+        String language = sharedPreferences.getString(SELECTED_LANGUAGE, null);
+
+        if (language == null) {
+            language = "en"; // Postavi defaultni jezik na engleski
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString(SELECTED_LANGUAGE, language);
+            editor.apply();
+        }
+
+        setAppLocale(language);
+
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -90,13 +114,63 @@ public class MainActivity extends AppCompatActivity {
 
         navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
             if (destination.getId() == R.id.add_osnovno_sredstvo_fragment || destination.getId() == R.id.nav_add_zaposleni
-                    || destination.getId() == R.id.nav_add_lokacija) {
+                    || destination.getId() == R.id.nav_add_lokacija || destination.getId() == R.id.nav_details) {
                 binding.appBarMain.fab.setVisibility(View.GONE);
             } else {
                 binding.appBarMain.fab.setVisibility(View.VISIBLE);
             }
         });
     }
+
+    public void changeLanguage() {
+        // Prikaz opcija za izbor jezika
+        final String[] languages = {"en", "sr"};
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Izaberite jezik")
+                .setItems(languages, (dialog, which) -> {
+                    // Spremi odabrani jezik u SharedPreferences
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putString(SELECTED_LANGUAGE, languages[which]);
+                    editor.apply();
+
+                    // Promijeni jezik aplikacije
+                    setAppLocale(languages[which]);
+
+                    // Restartuj aktivnost da bi se promjene primijenile
+                    recreate();
+                });
+        builder.show();
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        if(item.getItemId() == R.id.btnChangeLangView) {
+            changeLanguage();
+            return true;
+        }else{
+           return super.onOptionsItemSelected(item);
+       }
+
+    }
+
+
+    private void setAppLocale(String localeCode) {
+        Locale locale = new Locale(localeCode);
+        Locale.setDefault(locale);
+
+        Resources resources = getResources();
+        Configuration config = resources.getConfiguration();
+        config.setLocale(locale);
+
+        // Ažuriranje konfiguracije jezika za cijelu aplikaciju
+        resources.updateConfiguration(config, resources.getDisplayMetrics());
+
+        // Ažuriraj trenutni prikaz
+        getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

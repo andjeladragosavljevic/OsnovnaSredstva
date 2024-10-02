@@ -60,6 +60,8 @@ public class LokacijaRecyclerViewAdapter extends RecyclerView.Adapter<LokacijaRe
         holder.mIdView.setText(String.valueOf(lokacije.get(position).getId()));
         holder.mAdresaView.setText(lokacije.get(position).getAdresa());
         holder.mGradView.setText(lokacije.get(position).getGrad());
+        holder.mLongitudeView.setText(lokacije.get(position).getLongitude());
+        holder.mLatitudeView.setText(lokacije.get(position).getLatitude());
 
         holder.itemView.setOnClickListener(v -> {
             // Create and show the BottomSheetDialog
@@ -105,6 +107,8 @@ public class LokacijaRecyclerViewAdapter extends RecyclerView.Adapter<LokacijaRe
         public final TextView mIdView;
         public final TextView mAdresaView;
         public final TextView mGradView;
+        public final TextView mLatitudeView;
+        public final TextView mLongitudeView;
         public Lokacija mItem;
 
         public ViewHolder(FragmentLokacijaBinding binding) {
@@ -112,6 +116,8 @@ public class LokacijaRecyclerViewAdapter extends RecyclerView.Adapter<LokacijaRe
             mIdView = binding.itemNumber;
             mAdresaView = binding.adresa;
             mGradView = binding.grad;
+            mLatitudeView = binding.latitude;
+            mLongitudeView = binding.longitude;
         }
 
         @Override

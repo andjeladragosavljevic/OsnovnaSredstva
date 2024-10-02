@@ -6,19 +6,68 @@
     android:layout_height="match_parent"
     tools:context=".ui.zaposleni.ZaposleniFragment">
 
-<androidx.recyclerview.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    <!-- MaterialCardView for expandable search -->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/searchCard"
+        style="@style/ExpandablePanelStyle">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- Header with Expand/Collapse icon -->
+            <LinearLayout
+                android:id="@+id/expansionHeader"
+                style="@style/ExpansionHeaderStyle">
+
+                <!-- Title of the section -->
+                <TextView
+                    android:id="@+id/sectionTitle"
+                    style="@style/SectionTitleStyle"
+                    android:text="@string/opcije_za_pretragu" />
+
+                <!-- Icon to expand/collapse -->
+                <ImageView
+                    android:id="@+id/expandCollapseIcon"
+                    style="@style/ExpandCollapseIconStyle" />
+            </LinearLayout>
+
+            <!-- Expandable content, hidden by default -->
+            <LinearLayout
+                android:id="@+id/expansionContent"
+                style="@style/ExpansionContentStyle">
+
+
+                <SearchView
+                    android:id="@+id/searchViewIme"
+                    style="@style/SearchViewStyle"
+                    android:queryHint="@string/pretrazi_po_imenu" />
+
+
+                <SearchView
+                    android:id="@+id/searchViewPrezime"
+                    style="@style/SearchViewStyle"
+                    android:queryHint="@string/pretrazi_po_prezimenu"
+                    android:layout_marginTop="8dp" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+
+<androidx.recyclerview.widget.RecyclerView
     android:id="@+id/list"
     android:name="org.unibl.etf.osnovasredstvaapp.ui.zaposleni.ZaposleniFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_below="@id/searchCard"
     android:layout_marginLeft="16dp"
     android:layout_marginRight="16dp"
     app:layoutManager="LinearLayoutManager"
     tools:context=".ui.zaposleni.ZaposleniFragment"
     tools:listitem="@layout/fragment_zaposleni" />
-
 
 
 <TextView

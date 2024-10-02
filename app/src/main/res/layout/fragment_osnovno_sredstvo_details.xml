@@ -8,12 +8,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="16dp">
+        android:padding="16dp"
+        style="@style/LinearLayoutStyle">
+
 
         <TextView
             android:id="@+id/textViewNaziv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            style="@style/TextViewTitleStyle"
             android:text="Naziv:"
             android:textStyle="bold" />
 
@@ -21,42 +24,49 @@
             android:id="@+id/textViewOpis"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            style="@style/TextViewBodyStyle"
             android:text="Opis" />
 
         <TextView
             android:id="@+id/textViewBarkod"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            style="@style/TextViewBodyStyle"
             android:text="Barkod" />
 
         <TextView
             android:id="@+id/textViewCijena"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            style="@style/TextViewBodyStyle"
             android:text="Cijena" />
 
         <TextView
             android:id="@+id/textViewDatumKreiranja"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            style="@style/TextViewBodyStyle"
             android:text="Datum Kreiranja" />
 
         <TextView
             android:id="@+id/textViewOsoba"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            style="@style/TextViewBodyStyle"
             android:text="Zadužena osoba" />
 
         <TextView
             android:id="@+id/textViewLokacija"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            style="@style/TextViewBodyStyle"
             android:text="Lokacija" />
 
         <ImageView
             android:id="@+id/imageViewSlika"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            style="@style/ImageViewStyle"
             android:contentDescription="Slika osnovnog sredstva" />
 
     </LinearLayout>

@@ -76,6 +76,9 @@ public class AddOsnovnoSredstvoFragment extends Fragment {
     private Uri imageUri;
 
     private OsnovnoSredstvoDao osnovnoSredstvoDao;
+    private ZaposleniDao zaposleniDao;
+    private LokacijaDao lokacijaDao;
+
     private OsnovnoSredstvo osnovnoSredstvoZaAzuriranje;
     private static final String ARG_OS = "osnovnoSredstvo";
     AppDatabase db;
@@ -110,32 +113,47 @@ public class AddOsnovnoSredstvoFragment extends Fragment {
         ZaposleniDao zaposleniDao = db.zaposleniDao();
         LokacijaDao lokacijaDao = db.lokacijaDao();
 
+        AutoCompleteTextView autoCompleteTextViewLokacija = view.findViewById(R.id.autoCompleteTextViewLokacija);
+        AutoCompleteTextView autoCompleteTextViewOsoba = view.findViewById(R.id.autoCompleteTextViewOsoba);
 
-            // Provera i inicijalizacija osnovnog sredstva
-            if (osnovnoSredstvoZaAzuriranje != null) {
-                osnovnoSredstvo = osnovnoSredstvoZaAzuriranje;  // Ažuriramo postojeće osnovno sredstvo
+        // Provera i inicijalizacija osnovnog sredstva
+        if (osnovnoSredstvoZaAzuriranje != null) {
+            osnovnoSredstvo = osnovnoSredstvoZaAzuriranje;  // Ažuriramo postojeće osnovno sredstvo
 
-                // Popunite polja sa postojećim podacima
-                nazivOsnovnogSredstva.setText(osnovnoSredstvo.getNaziv());
-                opisOsnovnogSredstva.setText(osnovnoSredstvo.getOpis());
-                barcodeEditText.setText(osnovnoSredstvo.getBarkod());
-                cijenaOsnovnogSredstva.setText(String.valueOf(osnovnoSredstvo.getCijena()));
+            // Popunite polja sa postojećim podacima
+            nazivOsnovnogSredstva.setText(osnovnoSredstvo.getNaziv());
+            opisOsnovnogSredstva.setText(osnovnoSredstvo.getOpis());
+            barcodeEditText.setText(osnovnoSredstvo.getBarkod());
+            cijenaOsnovnogSredstva.setText(String.valueOf(osnovnoSredstvo.getCijena()));
 
-                currentPhotoPath = osnovnoSredstvo.getSlikaPath();
+            currentPhotoPath = osnovnoSredstvo.getSlikaPath();
 
-                // Prikaži sliku ako postoji putanja
-                if (osnovnoSredstvoZaAzuriranje != null && osnovnoSredstvoZaAzuriranje.getSlikaPath() != null) {
-                    currentPhotoPath = osnovnoSredstvoZaAzuriranje.getSlikaPath();
-                    File imgFile = new File(currentPhotoPath);
-                    if (imgFile.exists()) {
-                        imageView.setImageURI(Uri.fromFile(imgFile)); // Prikaz slike
-                    }
+            // Prikaži sliku ako postoji putanja
+            if (osnovnoSredstvoZaAzuriranje != null && osnovnoSredstvoZaAzuriranje.getSlikaPath() != null) {
+                currentPhotoPath = osnovnoSredstvoZaAzuriranje.getSlikaPath();
+                File imgFile = new File(currentPhotoPath);
+                if (imgFile.exists()) {
+                    imageView.setImageURI(Uri.fromFile(imgFile)); // Prikaz slike
                 }
-
-
-            } else {
-                osnovnoSredstvo = new OsnovnoSredstvo();  // Kreiramo novo osnovno sredstvo
             }
+
+
+            Zaposleni zaposleni = zaposleniDao.getById(osnovnoSredstvo.getZaduzenaOsobaId());
+            if (zaposleni != null) {
+                autoCompleteTextViewOsoba.setText(zaposleni.getIme() + " " + zaposleni.getPrezime());
+            }
+
+            // Dohvati lokaciju i postavi
+            Lokacija lokacija = lokacijaDao.getById(osnovnoSredstvo.getZaduzenaLokacijaId());
+            if (lokacija != null) {
+                autoCompleteTextViewLokacija.setText(lokacija.getAdresa() + ", " + lokacija.getGrad());
+            }
+
+
+
+        } else {
+            osnovnoSredstvo = new OsnovnoSredstvo();  // Kreiramo novo osnovno sredstvo
+        }
         // Dohvatanje svih zaposlenih i lokacija iz baze
         List<Zaposleni> zaposleniList = zaposleniDao.getAll();
         List<Lokacija> lokacijaList = lokacijaDao.getAll();
@@ -145,9 +163,8 @@ public class AddOsnovnoSredstvoFragment extends Fragment {
         for (Zaposleni zaposleni : zaposleniList) {
             zaposleniImena.add(zaposleni.getIme() + " " + zaposleni.getPrezime());
         }
-        ArrayAdapter<String> zaposleniAdapter = new ArrayAdapter<>(requireContext(),
-                android.R.layout.simple_dropdown_item_1line, zaposleniImena);
-        AutoCompleteTextView autoCompleteTextViewOsoba = view.findViewById(R.id.autoCompleteTextViewOsoba);
+        ArrayAdapter<String> zaposleniAdapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_dropdown_item_1line, zaposleniImena);
+
         autoCompleteTextViewOsoba.setAdapter(zaposleniAdapter);
 
         // Popunjavanje AutoCompleteTextView za lokacije
@@ -155,9 +172,8 @@ public class AddOsnovnoSredstvoFragment extends Fragment {
         for (Lokacija lokacija : lokacijaList) {
             lokacijeImena.add(lokacija.getGrad() + ", " + lokacija.getAdresa());
         }
-        ArrayAdapter<String> lokacijaAdapter = new ArrayAdapter<>(requireContext(),
-                android.R.layout.simple_dropdown_item_1line, lokacijeImena);
-        AutoCompleteTextView autoCompleteTextViewLokacija = view.findViewById(R.id.autoCompleteTextViewLokacija);
+        ArrayAdapter<String> lokacijaAdapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_dropdown_item_1line, lokacijeImena);
+
         autoCompleteTextViewLokacija.setAdapter(lokacijaAdapter);
 
         // Odabir zaposlenog
@@ -182,18 +198,6 @@ public class AddOsnovnoSredstvoFragment extends Fragment {
             }
         });
 
-//        // Učitavanje osnovnog sredstva za ažuriranje (ako postoji)
-//        if (osnovnoSredstvoZaAzuriranje != null) {
-//            nazivOsnovnogSredstva.setText(osnovnoSredstvoZaAzuriranje.getNaziv());
-//            opisOsnovnogSredstva.setText(osnovnoSredstvoZaAzuriranje.getOpis());
-//            barcodeEditText.setText(osnovnoSredstvoZaAzuriranje.getBarkod());
-//            cijenaOsnovnogSredstva.setText(String.valueOf(osnovnoSredstvoZaAzuriranje.getCijena()));
-//            Log.d("STO", osnovnoSredstvoZaAzuriranje.getSlikaPath());
-//            if (osnovnoSredstvoZaAzuriranje.getSlikaPath() != null) {
-//
-//                loadImageFromPath(osnovnoSredstvoZaAzuriranje.getSlikaPath());
-//            }
-//        }
 
         // Listener za upload slike iz galerije
         uploadImageButton.setOnClickListener(v -> openGallery());
@@ -225,19 +229,18 @@ public class AddOsnovnoSredstvoFragment extends Fragment {
         galleryLauncher.launch(intent);
     }
 
-    private final ActivityResultLauncher<Intent> galleryLauncher = registerForActivityResult(
-            new ActivityResultContracts.StartActivityForResult(), result -> {
-                if (result.getResultCode() == Activity.RESULT_OK && result.getData() != null) {
-                    Uri imageUri = result.getData().getData();
-                    if (imageUri != null) {
-                        // Sačuvaj sliku u lokalni direktorijum aplikacije
-                        saveImageToAppStorage(imageUri);
+    private final ActivityResultLauncher<Intent> galleryLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
+        if (result.getResultCode() == Activity.RESULT_OK && result.getData() != null) {
+            Uri imageUri = result.getData().getData();
+            if (imageUri != null) {
+                // Sačuvaj sliku u lokalni direktorijum aplikacije
+                saveImageToAppStorage(imageUri);
 
-                        // Prikaz slike nakon što je sačuvana u lokalnom direktorijumu
-                        imageView.setImageURI(Uri.fromFile(new File(currentPhotoPath)));
-                    }
-                }
-            });
+                // Prikaz slike nakon što je sačuvana u lokalnom direktorijumu
+                imageView.setImageURI(Uri.fromFile(new File(currentPhotoPath)));
+            }
+        }
+    });
 
     // Metoda koja proverava da li URI dolazi iz MediaStore
     private boolean isMediaStoreUri(Uri uri) {
@@ -281,30 +284,26 @@ public class AddOsnovnoSredstvoFragment extends Fragment {
     }
 
     // Pokretanje kamere
-    private final ActivityResultLauncher<Intent> cameraLauncher = registerForActivityResult(
-            new ActivityResultContracts.StartActivityForResult(), result -> {
-                if (result.getResultCode() == Activity.RESULT_OK) {
-                    // Prikaz slike koja je uslikana kamerom
-                    imageView.setImageURI(Uri.fromFile(new File(currentPhotoPath)));
-                }
-            });
+    private final ActivityResultLauncher<Intent> cameraLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
+        if (result.getResultCode() == Activity.RESULT_OK) {
+            // Prikaz slike koja je uslikana kamerom
+            imageView.setImageURI(Uri.fromFile(new File(currentPhotoPath)));
+        }
+    });
 
 
     // Proveravanje dozvole za kameru
-    private final ActivityResultLauncher<String> cameraPermissionLauncher =
-            registerForActivityResult(new ActivityResultContracts.RequestPermission(), isGranted -> {
-                if (isGranted) {
-                    openCamera();
-                } else {
-                    Toast.makeText(requireContext(), "Dozvola za kameru je potrebna.", Toast.LENGTH_SHORT).show();
-                }
-            });
-
+    private final ActivityResultLauncher<String> cameraPermissionLauncher = registerForActivityResult(new ActivityResultContracts.RequestPermission(), isGranted -> {
+        if (isGranted) {
+            openCamera();
+        } else {
+            Toast.makeText(requireContext(), "Dozvola za kameru je potrebna.", Toast.LENGTH_SHORT).show();
+        }
+    });
 
 
     private void checkCameraPermissionAndScan() {
-        if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.CAMERA)
-                == PackageManager.PERMISSION_GRANTED) {
+        if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
             // Ako je dozvola odobrena, pokreni skeniranje
             scanCode();
         } else {
@@ -325,34 +324,40 @@ public class AddOsnovnoSredstvoFragment extends Fragment {
         scanLauncher.launch(options);
     }
 
-    private final ActivityResultLauncher<ScanOptions> scanLauncher = registerForActivityResult(
-            new ScanContract(), result -> {
-                if (result.getContents() != null) {
-                    barcodeEditText.setText(result.getContents());
-                }
-            });
+    private final ActivityResultLauncher<ScanOptions> scanLauncher = registerForActivityResult(new ScanContract(), result -> {
+        if (result.getContents() != null) {
+            barcodeEditText.setText(result.getContents());
+        }
+    });
 
-    private final ActivityResultLauncher<String> requestCameraPermissionLauncher =
-            registerForActivityResult(new ActivityResultContracts.RequestPermission(), isGranted -> {
-                if (isGranted) {
-                    // Ako je dozvola odobrena, pokreni skeniranje
-                    scanCode();
-                } else {
-                    // Ako je dozvola odbijena, obavesti korisnika
-                    Toast.makeText(getContext(), "Barkod se ne može skenirati bez kamere.", Toast.LENGTH_SHORT).show();
-                }
-            });
+    private final ActivityResultLauncher<String> requestCameraPermissionLauncher = registerForActivityResult(new ActivityResultContracts.RequestPermission(), isGranted -> {
+        if (isGranted) {
+            // Ako je dozvola odobrena, pokreni skeniranje
+            scanCode();
+        } else {
+            // Ako je dozvola odbijena, obavesti korisnika
+            Toast.makeText(getContext(), "Barkod se ne može skenirati bez kamere.", Toast.LENGTH_SHORT).show();
+        }
+    });
 
     // Čuvanje osnovnog sredstva
     private void saveOsnovnoSredstvo() {
         String naziv = nazivOsnovnogSredstva.getText().toString();
         String opis = opisOsnovnogSredstva.getText().toString();
         String barkod = barcodeEditText.getText().toString();
-        double cijena = Double.parseDouble(cijenaOsnovnogSredstva.getText().toString());
+        String cijenaTxt = cijenaOsnovnogSredstva.getText().toString();
+
         int day = datumKreiranja.getDayOfMonth();
         int month = datumKreiranja.getMonth();
         int year = datumKreiranja.getYear();
         String datum = day + "/" + (month + 1) + "/" + year;
+
+        if (naziv.isEmpty() || opis.isEmpty() || barkod.isEmpty() || opis.isEmpty() || barkod.isEmpty()
+                || cijenaTxt.isEmpty() || selectedLokacija == null || selectedZaposleni == null || datum.isEmpty()) {
+            Toast.makeText(getContext(), "Molimo popunite sva polja!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        double cijena = Double.parseDouble(cijenaTxt);
 
         osnovnoSredstvo.setNaziv(naziv);
         osnovnoSredstvo.setOpis(opis);
@@ -416,7 +421,6 @@ public class AddOsnovnoSredstvoFragment extends Fragment {
     }
 
 
-
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -453,7 +457,6 @@ public class AddOsnovnoSredstvoFragment extends Fragment {
             e.printStackTrace();
         }
     }
-
 
 
 }

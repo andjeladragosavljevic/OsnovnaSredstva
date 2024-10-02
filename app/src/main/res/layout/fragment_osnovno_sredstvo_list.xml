@@ -6,15 +6,9 @@
     android:layout_height="match_parent"
     tools:context=".ui.osnovnosredstvo.OsnovnoSredstvoFragment">
 
-    <!-- MaterialCardView for expandable search -->
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/searchCard"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:elevation="4dp"
-        android:layout_margin="16dp"
-        android:visibility="visible"
-        app:cardCornerRadius="8dp">
+        style="@style/ExpandablePanelStyle">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -25,54 +19,37 @@
             <!-- Header with Expand/Collapse icon -->
             <LinearLayout
                 android:id="@+id/expansionHeader"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical">
+                style="@style/ExpansionHeaderStyle">
 
                 <!-- Title of the section -->
                 <TextView
                     android:id="@+id/sectionTitle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Search Options"
-                    android:textStyle="bold"
-                    android:textSize="16sp" />
+                    style="@style/SectionTitleStyle"
+                    android:text="@string/opcije_za_pretragu" />
 
                 <!-- Icon to expand/collapse -->
                 <ImageView
                     android:id="@+id/expandCollapseIcon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_expand_more" />
+                    style="@style/ExpandCollapseIconStyle" />
             </LinearLayout>
 
             <!-- Expandable content, hidden by default -->
             <LinearLayout
                 android:id="@+id/expansionContent"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:visibility="gone"
-                android:layout_marginTop="8dp">
+                style="@style/ExpansionContentStyle">
 
                 <!-- SearchView for searching by name -->
                 <SearchView
                     android:id="@+id/searchView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:queryHint="Search by name"
-                    android:iconifiedByDefault="false" />
+                    style="@style/SearchViewStyle"
+                    android:queryHint="@string/pretrazi_po_nazivu" />
 
                 <!-- SearchView for searching by barkod -->
                 <SearchView
                     android:id="@+id/searchBarkod"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:queryHint="Search by barkod"
-                    android:layout_marginTop="8dp"
-                    android:iconifiedByDefault="false" />
+                    style="@style/SearchViewStyle"
+                    android:queryHint="@string/pretrazi_po_barkodu"
+                    android:layout_marginTop="8dp" />
             </LinearLayout>
 
         </LinearLayout>

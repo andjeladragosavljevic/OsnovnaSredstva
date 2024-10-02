@@ -7,6 +7,7 @@ import androidx.room.Query;
 import androidx.room.Update;
 
 
+import org.unibl.etf.osnovasredstvaapp.entity.Lokacija;
 import org.unibl.etf.osnovasredstvaapp.entity.Zaposleni;
 
 import java.util.List;
@@ -27,4 +28,14 @@ public interface ZaposleniDao {
 
     @Query("SELECT * FROM zaposleni")
     List<Zaposleni> getAll();
+
+    @Query("SELECT * FROM zaposleni WHERE ime LIKE '%' || :ime || '%'")
+    List<Zaposleni> filterByIme(String ime);
+
+    @Query("SELECT * FROM zaposleni WHERE prezime LIKE '%' || :prezime || '%'")
+    List<Zaposleni> filterByPrezime(String prezime);
+
+    @Query("SELECT * FROM zaposleni WHERE ime LIKE '%' || :ime || '%' AND prezime LIKE '%' || :prezime || '%'")
+    List<Zaposleni> filterByImeAndPrezime(String ime, String prezime);
+
 }

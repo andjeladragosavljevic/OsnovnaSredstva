@@ -31,29 +31,29 @@
             android:id="@+id/adresa"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Unesite prezime" />
+            android:hint="Unesite adresu" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Geografska sirina" />
+            android:text="Geografska duzina" />
 
         <EditText
             android:id="@+id/longitude"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Unesite sirinu" />
+            android:hint="Unesite duzinu" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Duzina" />
+            android:text="Geografska sirinu" />
 
         <EditText
             android:id="@+id/latitude"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Unesite duzinu" />
+            android:hint="Unesite sirinu" />
 
         <!-- Dugme za spremanje -->
         <Button

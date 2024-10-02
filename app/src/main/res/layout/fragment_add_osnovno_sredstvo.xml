@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -11,68 +10,56 @@
 
         <!-- Naziv osnovnog sredstva -->
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/BaseTextViewStyle"
             android:text="Naziv" />
 
         <EditText
             android:id="@+id/naziv_osnovno_sredtsvo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            style="@style/BaseEditTextStyle"
             android:hint="Unesite naziv" />
 
         <!-- Opis osnovnog sredstva -->
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/BaseTextViewStyle"
             android:text="Opis" />
 
         <EditText
             android:id="@+id/opis_osnovno_sredstvo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            style="@style/BaseEditTextStyle"
             android:hint="Unesite opis" />
 
         <!-- Barkod -->
         <Button
             android:id="@+id/scanBarcodeButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:drawableStart="@drawable/ic_camera"
+            style="@style/BaseButtonStyle"
+            android:drawableLeft="@drawable/ic_camera"
             android:text="Skeniraj barkod"
             android:layout_gravity="center_horizontal" />
 
-
-
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/BaseTextViewStyle"
             android:text="Barkod" />
 
         <EditText
             android:id="@+id/barkod_osnovno_sredstvo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            style="@style/BaseEditTextStyle"
             android:hint="Unesite barkod ručno ili skenirajte"
-            android:inputType="number"/>
+            android:inputType="number" />
 
         <!-- Cijena -->
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/BaseTextViewStyle"
             android:text="Cijena" />
 
         <EditText
             android:id="@+id/cijena_osnovno_sredstvo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            style="@style/BaseEditTextStyle"
             android:inputType="numberDecimal"
             android:hint="Unesite cijenu" />
 
         <!-- Datum kreiranja -->
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/BaseTextViewStyle"
             android:text="Datum kreiranja" />
 
         <DatePicker
@@ -82,8 +69,7 @@
 
         <!-- Zadužena osoba -->
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/BaseTextViewStyle"
             android:text="Zadužena osoba" />
 
         <AutoCompleteTextView
@@ -94,8 +80,7 @@
 
         <!-- Zadužena lokacija -->
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/BaseTextViewStyle"
             android:text="Zadužena lokacija" />
 
         <AutoCompleteTextView
@@ -104,19 +89,31 @@
             android:layout_height="wrap_content"
             android:hint="Izaberite lokaciju" />
 
-        <!-- Slika -->
-        <Button
-            android:id="@+id/buttonUploadSlika"
-            android:layout_width="wrap_content"
+        <!-- Horizontalni layout za dugmiće za sliku -->
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/ic_image"
-            android:layout_gravity="center_horizontal"
-            android:text="Dodaj sliku" />
-        <Button
-            android:id="@+id/buttonTakePicture"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Snimanje Slike" />
+            android:orientation="horizontal"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="16dp">
+
+            <Button
+                android:id="@+id/buttonUploadSlika"
+                style="@style/BaseButtonStyle"
+                android:drawableLeft="@drawable/ic_image"
+                android:text="Dodaj sliku"
+                android:layout_weight="1"
+                android:layout_marginEnd="8dp" />
+
+            <Button
+                android:id="@+id/buttonTakePicture"
+                style="@style/BaseButtonStyle"
+                android:drawableLeft="@drawable/ic_camera"
+                android:text="Snimi sliku"
+                android:layout_weight="1"
+                android:layout_marginStart="8dp" />
+        </LinearLayout>
+
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="match_parent"
@@ -124,11 +121,12 @@
             android:contentDescription="Prikaz odabrane slike"
             android:scaleType="centerCrop"
             android:layout_marginTop="16dp" />
+
         <!-- Dugme za spremanje -->
         <Button
             android:id="@+id/save_osnovno_sredstvo"
+            style="@style/BaseButtonStyle"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:text="Sačuvaj" />
     </LinearLayout>
 </ScrollView>

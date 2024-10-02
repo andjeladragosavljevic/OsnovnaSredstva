@@ -1,0 +1,44 @@
+<resources>
+    <string name="app_name">OsnovaSredstvaApp</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Dobro došli </string>
+    <string name="nav_header_subtitle">OSApp</string>
+    <string name="nav_header_desc">Navigaciono zaglavlje</string>
+
+
+    <string name="osnovna_sredstva">Osnovna sredstva</string>
+    <string name="novo_osnovno_sredstvo">Novo osnovno sredstvo</string>
+    <string name="lokacije">Lokacije</string>
+    <string name="nova_lokacija">Nova lokacija</string>
+    <string name="zaposleni">Zaposleni</string>
+    <string name="novi_zaposleni">Novi zaposleni</string>
+    <string name="detalji">Detalji</string>
+
+    <string name="opcije_za_pretragu">Opcije za pretragu</string>
+    <string name="pretrazi_po_gradu">Pretraži po gradu</string>
+    <string name="pretrazi_po_adresi">Pretraži po adresi</string>
+    <string name="pretrazi_po_nazivu">Pretraži po nazivu</string>
+    <string name="pretrazi_po_barkodu">Pretraži po barkodu</string>
+    <string name="pretrazi_po_imenu">Pretraži po imenu</string>
+    <string name="pretrazi_po_prezimenu">Pretraži po prezimenu</string>
+
+    <string name="title_activity_maps">Mapa</string>
+
+    <string name="change_language">Prommijeni jezik</string>
+
+    <!-- Preference Titles -->
+    <string name="messages_header">Poruka</string>
+    <string name="sync_header">Uskladi</string>
+
+    <!-- Messages Preferences -->
+    <string name="signature_title">Your signature</string>
+    <string name="reply_title">Default reply action</string>
+
+    <!-- Sync Preferences -->
+    <string name="sync_title">Sync email periodically</string>
+    <string name="attachment_title">Download incoming attachments</string>
+    <string name="attachment_summary_on">Automatically download attachments for incoming emails
+    </string>
+    <string name="attachment_summary_off">Only download attachments when manually requested</string>
+</resources>

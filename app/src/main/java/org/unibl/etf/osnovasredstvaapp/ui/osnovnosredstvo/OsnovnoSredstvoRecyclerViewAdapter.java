@@ -62,7 +62,8 @@ public class OsnovnoSredstvoRecyclerViewAdapter extends RecyclerView.Adapter<Osn
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         OsnovnoSredstvo osnovnoSredstvo = osnovnaSredstva.get(position);
-        holder.mContentView.setText(osnovnoSredstvo.getNaziv());  //
+        holder.mContentView.setText(osnovnoSredstvo.getNaziv());
+        holder.mBarkodView.setText(osnovnoSredstvo.getBarkod());
 
         holder.itemView.setOnClickListener(v -> {
             // Create and show the BottomSheetDialog
@@ -116,11 +117,13 @@ public class OsnovnoSredstvoRecyclerViewAdapter extends RecyclerView.Adapter<Osn
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final View mView;
         public final TextView mContentView;
+        public final TextView mBarkodView;
 
         public ViewHolder(View view) {
             super(view);
             mView = view;
             mContentView = view.findViewById(R.id.content);
+            mBarkodView = view.findViewById(R.id.barkod);
         }
 
         @Override

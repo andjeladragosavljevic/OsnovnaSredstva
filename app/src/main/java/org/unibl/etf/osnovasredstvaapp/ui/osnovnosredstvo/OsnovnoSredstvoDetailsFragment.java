@@ -95,7 +95,7 @@ public class OsnovnoSredstvoDetailsFragment extends Fragment {
             textViewLokacija.setText(lokacija.getAdresa() + ", " + lokacija.getGrad());
         }
 
-        Log.d("BLA", osnovnoSredstvo.getSlikaPath());
+
 
         if (osnovnoSredstvo.getSlikaPath() != null) {
                 String currentPhotoPath = osnovnoSredstvo.getSlikaPath();
