@@ -27,10 +27,10 @@
                     style="@style/SectionTitleStyle"
                     android:text="@string/opcije_za_pretragu" />
 
-                <!-- Icon to expand/collapse -->
                 <ImageView
                     android:id="@+id/expandCollapseIcon"
-                    style="@style/ExpandCollapseIconStyle" />
+                    style="@style/ExpandCollapseIconStyle"
+                    android:contentDescription="@string/prikaz_odabrane_slike" />
             </LinearLayout>
 
             <!-- Expandable content, hidden by default -->
@@ -55,7 +55,7 @@
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
 
-    <!-- RecyclerView for displaying items -->
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/list"
         android:layout_width="match_parent"
@@ -67,13 +67,13 @@
         app:layoutManager="LinearLayoutManager"
         tools:listitem="@layout/fragment_osnovno_sredstvo" />
 
-    <!-- TextView for empty view -->
+
     <TextView
         android:id="@+id/empty_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:visibility="gone"
-        android:text="Nema podataka za prikaz" />
+        android:text="@string/prazna_lista" />
 
 </RelativeLayout>

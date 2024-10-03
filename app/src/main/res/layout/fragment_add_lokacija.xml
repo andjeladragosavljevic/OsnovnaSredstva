@@ -13,53 +13,63 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Grad" />
+            android:text="@string/grad" />
 
         <EditText
             android:id="@+id/grad"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Unesite grad" />
+            android:hint="@string/unos_grad"
+            android:inputType="text"
+            android:importantForAutofill="no"
+            android:minHeight="48dp"/>
 
-        <!--Adresa -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Adresa" />
+            android:text="@string/adresa" />
 
         <EditText
             android:id="@+id/adresa"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Unesite adresu" />
+            android:hint="@string/unos_adrese"
+            android:importantForAutofill="no"
+            android:inputType="text"
+            android:minHeight="48dp"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Geografska duzina" />
+            android:text="@string/geografska_duzina" />
 
         <EditText
             android:id="@+id/longitude"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Unesite duzinu" />
+            android:hint="@string/unos_duzine"
+            android:inputType="numberDecimal"
+            android:importantForAutofill="no"
+            android:minHeight="48dp"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Geografska sirinu" />
+            android:text="@string/geografska_sirina" />
 
         <EditText
             android:id="@+id/latitude"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Unesite sirinu" />
+            android:hint="@string/unos_sirine"
+            android:importantForAutofill="no"
+            android:inputType="numberDecimal"
+            android:minHeight="48dp"/>
 
-        <!-- Dugme za spremanje -->
         <Button
             android:id="@+id/save_lokacija"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Sačuvaj" />
+            android:text="@string/sacuvaj" />
     </LinearLayout>
 </ScrollView>

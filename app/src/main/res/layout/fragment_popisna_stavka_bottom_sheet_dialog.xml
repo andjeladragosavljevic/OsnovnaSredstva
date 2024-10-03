@@ -9,7 +9,7 @@
         android:id="@+id/text_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Opcije"
+        android:text="@string/opcije"
         android:textAppearance="?attr/textAppearanceHeadline6" />
 
 
@@ -17,12 +17,12 @@
         android:id="@+id/button_update"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Ažuriraj" />
+        android:text="@string/azuriraj" />
 
     <Button
         android:id="@+id/button_delete"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Obriši" />
+        android:text="@string/obrisi" />
 
 </LinearLayout>

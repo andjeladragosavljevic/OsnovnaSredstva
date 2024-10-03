@@ -1,45 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/osnovna_sredstva" />
+
     <AutoCompleteTextView
         android:id="@+id/osnovnoSredstvoEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Osnovno sredstvo" />
+        android:hint="@string/osnovna_sredstva"
+        android:minHeight="48dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/zaduzena_osoba" />
 
     <EditText
         android:id="@+id/trenutnaOsobaEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Trenutna osoba"
-       />
+        android:hint="@string/zaduzena_osoba"
+        android:minHeight="48dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/nova_osoba" />
 
     <AutoCompleteTextView
         android:id="@+id/novaOsobaEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Nova osoba" />
+        android:hint="@string/nova_osoba"
+        android:minHeight="48dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/zaduzena_lokacija" />
 
     <EditText
         android:id="@+id/trenutnaLokacijaEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Trenutna lokacija" />
+        android:hint="@string/zaduzena_lokacija"
+        android:minHeight="48dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/nova_lokacija" />
 
     <AutoCompleteTextView
         android:id="@+id/novaLokacijaEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Nova lokacija" />
+        android:hint="@string/nova_lokacija"
+        android:minHeight="48dp" />
 
     <Button
         android:id="@+id/saveStavkaButton"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Sačuvaj stavku" />
+        android:text="@string/sacuvaj" />
 </LinearLayout>

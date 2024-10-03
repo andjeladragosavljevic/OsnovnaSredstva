@@ -1,6 +1,6 @@
 package org.unibl.etf.osnovasredstvaapp.ui.zaposleni;
 
-import androidx.fragment.app.Fragment;
+
 import androidx.fragment.app.FragmentActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -8,22 +8,18 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import org.unibl.etf.osnovasredstvaapp.dao.ZaposleniDao;
 import org.unibl.etf.osnovasredstvaapp.database.AppDatabase;
-import org.unibl.etf.osnovasredstvaapp.entity.OsnovnoSredstvo;
 import org.unibl.etf.osnovasredstvaapp.entity.Zaposleni;
 import org.unibl.etf.osnovasredstvaapp.ui.zaposleni.placeholder.PlaceholderContent.PlaceholderItem;
 import org.unibl.etf.osnovasredstvaapp.databinding.FragmentZaposleniBinding;
 import org.unibl.etf.osnovasredstvaapp.R;
 
 import java.util.List;
-import java.util.Locale;
 
 /**
  * {@link RecyclerView.Adapter} that can display a {@link PlaceholderItem}.

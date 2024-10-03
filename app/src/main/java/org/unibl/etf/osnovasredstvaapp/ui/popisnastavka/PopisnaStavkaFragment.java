@@ -1,17 +1,14 @@
 package org.unibl.etf.osnovasredstvaapp.ui.popisnastavka;
 
-import android.content.Context;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.DividerItemDecoration;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,13 +18,7 @@ import android.widget.TextView;
 import org.unibl.etf.osnovasredstvaapp.R;
 import org.unibl.etf.osnovasredstvaapp.dao.PopisnaStavkaDao;
 import org.unibl.etf.osnovasredstvaapp.database.AppDatabase;
-import org.unibl.etf.osnovasredstvaapp.entity.OsnovnoSredstvo;
 import org.unibl.etf.osnovasredstvaapp.entity.PopisnaStavka;
-import org.unibl.etf.osnovasredstvaapp.ui.osnovnosredstvo.OsnovnoSredstvoRecyclerViewAdapter;
-import org.unibl.etf.osnovasredstvaapp.ui.popisnastavka.placeholder.PlaceholderContent;
-import org.unibl.etf.osnovasredstvaapp.ui.zaposleni.ZaposleniRecyclerViewAdapter;
-
-import java.util.ArrayList;
 import java.util.List;
 
 /**

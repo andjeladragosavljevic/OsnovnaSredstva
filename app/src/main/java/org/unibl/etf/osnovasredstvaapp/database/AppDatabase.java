@@ -33,12 +33,9 @@ public abstract class AppDatabase extends RoomDatabase {
     public abstract PopisnaStavkaDao popisnaStavkaDao();
 
     public static synchronized AppDatabase getInstance(Context context) {
-       Log.d("DATABASE", "Database");
         if (instance == null) {
             instance = Room.databaseBuilder(context.getApplicationContext(),
                             AppDatabase.class, "osnovna_sredstva_db")
-                  //  .addCallback(roomCallback)
-                    // Možete koristiti ovaj metod tokom razvoja, ne u produkciji
                     .fallbackToDestructiveMigration()
                     .allowMainThreadQueries()
                     .build();

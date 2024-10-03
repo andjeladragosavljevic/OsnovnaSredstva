@@ -1,7 +1,7 @@
 package org.unibl.etf.osnovasredstvaapp.ui.osnovnosredstvo;
 
 import android.os.AsyncTask;
-import android.util.Log;
+
 
 import org.unibl.etf.osnovasredstvaapp.dao.OsnovnoSredstvoDao;
 import org.unibl.etf.osnovasredstvaapp.entity.OsnovnoSredstvo;
@@ -33,13 +33,12 @@ public class OsnovnoSredstvoTask extends AsyncTask<Void, Void, List<OsnovnoSreds
         this.operationType = OperationType.FILTER;
     }
 
-    public OsnovnoSredstvoTask(OsnovnoSredstvoFragment fragment, OsnovnoSredstvoDao osnovnoSredstvoDao,  OperationType operationType, int id) {
+    public OsnovnoSredstvoTask(OsnovnoSredstvoFragment fragment, OsnovnoSredstvoDao osnovnoSredstvoDao, OperationType operationType, int id) {
         this.fragmentReference = new WeakReference<>(fragment);
         this.osnovnoSredstvoDao = osnovnoSredstvoDao;
         this.operationType = operationType;
         this.id = id;
     }
-
 
 
     // Konstruktor za INSERT, UPDATE i DELETE operacije
@@ -70,15 +69,8 @@ public class OsnovnoSredstvoTask extends AsyncTask<Void, Void, List<OsnovnoSreds
                 } else {
                     return osnovnoSredstvoDao.getAll();
                 }
-            case INSERT: {
-                try {
-                    osnovnoSredstvoDao.insert(osnovnoSredstvo);
-                    Log.d("OsnovnoSredstvoTask", "Insert success");
-                } catch (Exception e) {
-                    Log.e("OsnovnoSredstvoTask", "Insert error: " + e.getMessage());
-                }
-
-            }
+            case INSERT:
+                osnovnoSredstvoDao.insert(osnovnoSredstvo);
             case GETBY: {
                 List<OsnovnoSredstvo> os = new ArrayList<>();
                 os.add(osnovnoSredstvoDao.getById(id));

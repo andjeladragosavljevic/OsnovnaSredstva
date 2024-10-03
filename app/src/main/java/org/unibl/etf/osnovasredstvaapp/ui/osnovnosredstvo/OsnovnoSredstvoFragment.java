@@ -1,8 +1,6 @@
 package org.unibl.etf.osnovasredstvaapp.ui.osnovnosredstvo;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -13,14 +11,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.RotateAnimation;
-import android.widget.AutoCompleteTextView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.SearchView;
@@ -28,14 +22,11 @@ import android.widget.TextView;
 
 import com.google.android.material.card.MaterialCardView;
 
-import org.unibl.etf.osnovasredstvaapp.MainActivity;
 import org.unibl.etf.osnovasredstvaapp.R;
 import org.unibl.etf.osnovasredstvaapp.dao.OsnovnoSredstvoDao;
 import org.unibl.etf.osnovasredstvaapp.database.AppDatabase;
 import org.unibl.etf.osnovasredstvaapp.entity.OsnovnoSredstvo;
-import org.unibl.etf.osnovasredstvaapp.ui.osnovnosredstvo.placeholder.PlaceholderContent;
 
-import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -177,7 +168,7 @@ public class OsnovnoSredstvoFragment extends Fragment {
         if (args != null) {
 
             int lokacijaId = args.getInt("LOKACIJA_ID", -1);
-            Log.d("TTT", lokacijaId+"");
+
             if (lokacijaId != -1) {
                 filterByLocation(lokacijaId);  // Poziv metode za filtriranje po lokaciji
             } else {

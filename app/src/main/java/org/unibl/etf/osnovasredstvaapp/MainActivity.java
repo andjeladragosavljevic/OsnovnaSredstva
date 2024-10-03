@@ -31,8 +31,8 @@ public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
 
     private SharedPreferences sharedPreferences;
-    private static final String LANGUAGE_PREF = "language_pref";
-    private static final String SELECTED_LANGUAGE = "selected_language";
+    private static final String LANGUAGE_PREF = "";
+    private static final String SELECTED_LANGUAGE = "selectlanguage_prefed_language";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -138,7 +138,7 @@ public class MainActivity extends AppCompatActivity {
         // Prikaz opcija za izbor jezika
         final String[] languages = {"en", "sr"};
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Izaberite jezik")
+        builder.setTitle(getString(R.string.izaberite_jezik))
                 .setItems(languages, (dialog, which) -> {
                     // Spremi odabrani jezik u SharedPreferences
                     SharedPreferences.Editor editor = sharedPreferences.edit();

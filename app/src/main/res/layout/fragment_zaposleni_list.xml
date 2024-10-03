@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".ui.zaposleni.ZaposleniFragment">
 
-    <!-- MaterialCardView for expandable search -->
+
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/searchCard"
         style="@style/ExpandablePanelStyle">
@@ -17,28 +17,25 @@
             android:orientation="vertical"
             android:padding="16dp">
 
-            <!-- Header with Expand/Collapse icon -->
             <LinearLayout
                 android:id="@+id/expansionHeader"
                 style="@style/ExpansionHeaderStyle">
 
-                <!-- Title of the section -->
                 <TextView
                     android:id="@+id/sectionTitle"
                     style="@style/SectionTitleStyle"
                     android:text="@string/opcije_za_pretragu" />
 
-                <!-- Icon to expand/collapse -->
+
                 <ImageView
                     android:id="@+id/expandCollapseIcon"
-                    style="@style/ExpandCollapseIconStyle" />
+                    style="@style/ExpandCollapseIconStyle"
+                    android:contentDescription="@string/prikaz_odabrane_slike" />
             </LinearLayout>
 
-            <!-- Expandable content, hidden by default -->
             <LinearLayout
                 android:id="@+id/expansionContent"
                 style="@style/ExpansionContentStyle">
-
 
                 <SearchView
                     android:id="@+id/searchViewIme"
@@ -69,13 +66,12 @@
     tools:context=".ui.zaposleni.ZaposleniFragment"
     tools:listitem="@layout/fragment_zaposleni" />
 
-
 <TextView
     android:id="@+id/empty_view"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_centerInParent="true"
     android:visibility="gone"
-    android:text="Nema podataka za prikaz" />
+    android:text="@string/prazna_lista" />
 
 </RelativeLayout>

@@ -4,7 +4,6 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,11 +13,8 @@ import android.widget.Toast;
 
 import org.unibl.etf.osnovasredstvaapp.R;
 import org.unibl.etf.osnovasredstvaapp.dao.LokacijaDao;
-import org.unibl.etf.osnovasredstvaapp.dao.ZaposleniDao;
 import org.unibl.etf.osnovasredstvaapp.database.AppDatabase;
 import org.unibl.etf.osnovasredstvaapp.entity.Lokacija;
-import org.unibl.etf.osnovasredstvaapp.entity.Zaposleni;
-import org.unibl.etf.osnovasredstvaapp.ui.zaposleni.ZaposleniTask;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -94,7 +90,8 @@ public class AddLokacijaFragment extends Fragment {
             adresaEt.setText(lokacijaZaAzuriranje.getAdresa());
             longitudeEt.setText(lokacijaZaAzuriranje.getLongitude());
             latitudeEt.setText(lokacijaZaAzuriranje.getLatitude());
-            saveButton.setText("Ažuriraj lokaciju");
+            saveButton.setText(getString(R.string.azuriraj_lokaciju));
+
         }
 
         saveButton.setOnClickListener(new View.OnClickListener(){
@@ -107,7 +104,8 @@ public class AddLokacijaFragment extends Fragment {
 
 
                 if (grad.isEmpty() || adresa.isEmpty() || longitude.isEmpty() || latitude.isEmpty()) {
-                    Toast.makeText(getContext(), "Sva polja moraju biti popunjena", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), getString(R.string.popunite_sva_polja), Toast.LENGTH_SHORT).show();
+
                     return;
                 }
 
@@ -120,7 +118,8 @@ public class AddLokacijaFragment extends Fragment {
                     novaLokacija.setLatitude(latitude);
 
                     new LokacijaTask(null, lokacijaDao, LokacijaTask.OperationType.INSERT, novaLokacija).execute();
-                    Toast.makeText(getContext(), "Lokacija uspješno dodat", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), getString(R.string.uspjesno_dodavanje), Toast.LENGTH_SHORT).show();
+
                 } else {
 
                     lokacijaZaAzuriranje.setGrad(grad);
@@ -128,9 +127,9 @@ public class AddLokacijaFragment extends Fragment {
                     lokacijaZaAzuriranje.setLongitude(longitude);
                     lokacijaZaAzuriranje.setLatitude(latitude);
 
-
                     new LokacijaTask(null, lokacijaDao, LokacijaTask.OperationType.UPDATE, lokacijaZaAzuriranje).execute();
-                    Toast.makeText(getContext(), "Lokacija uspješno ažuriran", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), getString(R.string.uspjesno_azuriranje), Toast.LENGTH_SHORT).show();
+
                 }
             }
         });

@@ -9,24 +9,24 @@
         android:id="@+id/text_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Options"
+        android:text="@string/opcije"
         android:textAppearance="?attr/textAppearanceHeadline6" />
     <Button
         android:id="@+id/button_stavke"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Stavke" />
+        android:text="@string/popisne_stavke" />
 
     <Button
         android:id="@+id/button_update"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Update" />
+        android:text="@string/azuriraj" />
 
     <Button
         android:id="@+id/button_delete"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Delete" />
+        android:text="@string/obrisi" />
 
 </LinearLayout>

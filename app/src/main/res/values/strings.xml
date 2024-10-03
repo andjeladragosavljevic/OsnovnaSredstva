@@ -9,11 +9,38 @@
 
     <string name="osnovna_sredstva">Basic assets</string>
     <string name="novo_osnovno_sredstvo">New asset</string>
+    <string name="detalji">Details</string>
     <string name="lokacije">Location</string>
     <string name="nova_lokacija">New location</string>
     <string name="zaposleni">Employees</string>
     <string name="novi_zaposleni">New employee</string>
-    <string name="detalji">Details</string>
+    <string name="popisne_liste">Inventory lists</string>
+    <string name="nova_popisna_lista">New inventory lists</string>
+
+    <string name="prazna_lista">No data to display</string>
+
+    <string name="izaberite_jezik">Select a language</string>
+
+    <string name="naziv">Name</string>
+    <string name="unos_naziva">Enter a name</string>
+    <string name="opis">Description</string>
+    <string name="unos_opisa">Enter description</string>
+    <string name="skeniraj">Scan barcode</string>
+    <string name="barkod">Barcode</string>
+    <string name="unos_barkoda">Enter barcode manually or scan</string>
+    <string name="cijena">Price</string>
+    <string name="unos_cijene">Enter price</string>
+    <string name="datum_kreiranja">Creation date</string>
+    <string name="zaduzena_osoba">Assigned person</string>
+    <string name="izbor_osobe">Choose a person</string>
+    <string name="zaduzena_lokacija">Assigned location</string>
+    <string name="izbor_lokacije">Select location</string>
+    <string name="dodavanje_slike">Add image</string>
+    <string name="snimanje_slike">Take image</string>
+    <string name="sacuvaj">Save</string>
+
+
+
 
     <string name="opcije_za_pretragu">Search options</string>
     <string name="pretrazi_po_gradu">Search by city</string>
@@ -43,5 +70,46 @@
     </string>
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="prikaz_odabrane_slike">Prikaz odabrane slike</string>
+    <string name="ime">Firstname</string>
+    <string name="unos_imena">Enter firstname</string>
+    <string name="prezime">Lastname</string>
+    <string name="unos_prezimena">Enter lastname</string>
+    <string name="pozicija">Position</string>
+    <string name="unos_pozicije">Enter position</string>
+    <string name="grad">City</string>
+    <string name="unos_grad">Enter city</string>
+    <string name="adresa">Address</string>
+    <string name="unos_adrese">Enter address</string>
+    <string name="geografska_duzina">Longitude</string>
+    <string name="unos_duzine">Enter longitude</string>
+    <string name="geografska_sirina">Latitude</string>
+    <string name="unos_sirine">Enter latitude</string>
+
+    <string name="ime_prezime">%1$s %2$s</string>
+    <string name="adresa_grad">%1$s, %2$s</string>
+    <string name="azuriraj_lokaciju">Update location</string>
+    <string name="azuriraj_zaposlenog">Update employee</string>
+    <string name="naziv_popisne_liste">Inventory list name</string>
+    <string name="unos_naziv_popisne_liste">Enter inventory list name</string>
+    <string name="azuriraj_listu">Update inventory list</string>
+    <string name="nova_osoba">New employee</string>
+    <string name="unos_stavke">Add item manually</string>
+    <string name="nova_popisna_stavka">New inventory item</string>
+    <string name="popisne_stavke">Inventory items</string>
+    <string name="opcije">Options</string>
+    <string name="azuriraj">Update</string>
+    <string name="obrisi">Delete</string>
+    <string name="popunite_sva_polja">Please fill in all fields</string>
+    <string name="uspjesno_azuriranje">"Updated successfully "</string>
+    <string name="uspjesno_dodavanje">Added successfully</string>
+
+    <string name="trenutna_osoba">Current person: %1$s %2$s</string>
+    <string name="nova_osoba_stavka">New person: %1$s %2$s</string>
+    <string name="trenutna_lokacija">Current location: %1$s, %2$s</string>
+    <string name="nova_lokacija_stavka">New location: %1$s, %2$s</string>
+    <string name="n_a">N/A</string>
+
+
 </resources>

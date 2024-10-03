@@ -9,19 +9,13 @@ import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import org.unibl.etf.osnovasredstvaapp.R;
 import org.unibl.etf.osnovasredstvaapp.dao.PopisnaListaDao;
 import org.unibl.etf.osnovasredstvaapp.database.AppDatabase;
-import org.unibl.etf.osnovasredstvaapp.entity.Lokacija;
-import org.unibl.etf.osnovasredstvaapp.entity.OsnovnoSredstvo;
 import org.unibl.etf.osnovasredstvaapp.entity.PopisnaLista;
-import org.unibl.etf.osnovasredstvaapp.entity.Zaposleni;
-import org.unibl.etf.osnovasredstvaapp.ui.lokacija.LokacijaBottomSheetDialogFragment;
-import org.unibl.etf.osnovasredstvaapp.ui.lokacija.LokacijaTask;
 import org.unibl.etf.osnovasredstvaapp.ui.popisnalista.placeholder.PlaceholderContent.PlaceholderItem;
 import org.unibl.etf.osnovasredstvaapp.databinding.FragmentPopisnaListaBinding;
 
@@ -99,7 +93,6 @@ public class PopisnaListaRecyclerViewAdapter extends RecyclerView.Adapter<Popisn
         NavController navController = Navigation.findNavController((FragmentActivity) context, R.id.nav_host_fragment_content_main);
         Bundle args = new Bundle();
         args.putSerializable("popisnaLista", popisnaLista);
-        Log.d("lista", popisnaLista.getNaziv());
         navController.navigate(R.id.action_nav_popisna_lista_to_add_popisna_lista, args);
     }
 
@@ -112,7 +105,6 @@ public class PopisnaListaRecyclerViewAdapter extends RecyclerView.Adapter<Popisn
         public final TextView mIdView;
         public final TextView mContentView;
         public final TextView mDatum;
-        public PopisnaLista mItem;
 
         public ViewHolder(FragmentPopisnaListaBinding binding) {
             super(binding.getRoot());

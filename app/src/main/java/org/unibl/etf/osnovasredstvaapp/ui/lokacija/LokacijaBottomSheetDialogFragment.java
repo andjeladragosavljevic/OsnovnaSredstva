@@ -4,7 +4,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
-import android.util.Log;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,8 +14,6 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 import org.unibl.etf.osnovasredstvaapp.R;
 import org.unibl.etf.osnovasredstvaapp.entity.Lokacija;
-import org.unibl.etf.osnovasredstvaapp.entity.Zaposleni;
-import org.unibl.etf.osnovasredstvaapp.ui.zaposleni.ZaposleniBottomSheetDialogFragment;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -90,7 +88,6 @@ public class LokacijaBottomSheetDialogFragment extends BottomSheetDialogFragment
 
         // Handle update action
         updateButton.setOnClickListener(v -> {
-            Log.d("BLA", lokacija.getAdresa() );
             listener.onUpdate(lokacija);
             dismiss();
         });

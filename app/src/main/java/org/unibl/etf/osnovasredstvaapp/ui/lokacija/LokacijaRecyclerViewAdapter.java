@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
@@ -16,13 +15,9 @@ import org.unibl.etf.osnovasredstvaapp.R;
 import org.unibl.etf.osnovasredstvaapp.dao.LokacijaDao;
 import org.unibl.etf.osnovasredstvaapp.database.AppDatabase;
 import org.unibl.etf.osnovasredstvaapp.entity.Lokacija;
-import org.unibl.etf.osnovasredstvaapp.entity.Zaposleni;
 import org.unibl.etf.osnovasredstvaapp.ui.lokacija.placeholder.PlaceholderContent.PlaceholderItem;
 import org.unibl.etf.osnovasredstvaapp.databinding.FragmentLokacijaBinding;
-import org.unibl.etf.osnovasredstvaapp.ui.zaposleni.ZaposleniBottomSheetDialogFragment;
-import org.unibl.etf.osnovasredstvaapp.ui.zaposleni.ZaposleniTask;
 
-import java.util.Collection;
 import java.util.List;
 
 /**
@@ -33,9 +28,9 @@ public class LokacijaRecyclerViewAdapter extends RecyclerView.Adapter<LokacijaRe
 
     private List<Lokacija> lokacije;
     private Context context;
-    LokacijaDao lokacijaDao ;
-    public LokacijaRecyclerViewAdapter(List<Lokacija> items, Context context)
-    {
+    LokacijaDao lokacijaDao;
+
+    public LokacijaRecyclerViewAdapter(List<Lokacija> items, Context context) {
         lokacije = items;
         this.context = context;
         lokacijaDao = AppDatabase.getInstance(context).lokacijaDao();
@@ -96,7 +91,6 @@ public class LokacijaRecyclerViewAdapter extends RecyclerView.Adapter<LokacijaRe
         args.putSerializable("lokacija", lokacija);
         navController.navigate(R.id.action_nav_lokacije_to_nav_add_lokacija, args);
     }
-
 
 
     @Override

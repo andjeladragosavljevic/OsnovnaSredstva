@@ -86,7 +86,7 @@
     <fragment
         android:id="@+id/nav_popisna_lista"
         android:name="org.unibl.etf.osnovasredstvaapp.ui.popisnalista.PopisnaListaFragment"
-        android:label="@string/nova_lokacija"
+        android:label="@string/popisne_liste"
         tools:layout="@layout/fragment_popisna_lista_list" >
         <action
             android:id="@+id/action_nav_popisna_lista_to_add_popisna_lista"
@@ -103,13 +103,13 @@
     <fragment
         android:id="@+id/add_popisna_lista"
         android:name="org.unibl.etf.osnovasredstvaapp.ui.popisnalista.AddPopisnaListaFragment"
-        android:label="@string/novo_osnovno_sredstvo"
+        android:label="@string/nova_popisna_lista"
         tools:layout="@layout/fragment_add_popisna_lista" />
 
     <fragment
         android:id="@+id/nav_popisna_stavka_list"
         android:name="org.unibl.etf.osnovasredstvaapp.ui.popisnastavka.PopisnaStavkaFragment"
-        android:label="@string/novo_osnovno_sredstvo"
+        android:label="@string/popisne_stavke"
         tools:layout="@layout/fragment_popisna_stavka_list" >
         <action
             android:id="@+id/action_nav_popisna_stavka_list_to_add_popisna_stavka"
@@ -122,7 +122,7 @@
     <fragment
         android:id="@+id/add_popisna_stavka_fragment"
         android:name="org.unibl.etf.osnovasredstvaapp.ui.popisnastavka.AddPopisnaStavkaFragment"
-        android:label="@string/novo_osnovno_sredstvo"
+        android:label="@string/nova_popisna_stavka"
         tools:layout="@layout/fragment_add_popisna_stavka" />
 
 

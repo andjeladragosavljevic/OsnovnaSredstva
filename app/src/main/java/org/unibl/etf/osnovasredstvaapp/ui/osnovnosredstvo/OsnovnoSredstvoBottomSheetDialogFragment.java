@@ -13,8 +13,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 import org.unibl.etf.osnovasredstvaapp.R;
 import org.unibl.etf.osnovasredstvaapp.entity.OsnovnoSredstvo;
-import org.unibl.etf.osnovasredstvaapp.entity.Zaposleni;
-import org.unibl.etf.osnovasredstvaapp.ui.zaposleni.ZaposleniBottomSheetDialogFragment;
+
 
 /**
  * A simple {@link Fragment} subclass.

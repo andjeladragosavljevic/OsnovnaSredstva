@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,14 +24,9 @@ import com.google.android.material.card.MaterialCardView;
 
 import org.unibl.etf.osnovasredstvaapp.R;
 import org.unibl.etf.osnovasredstvaapp.dao.LokacijaDao;
-import org.unibl.etf.osnovasredstvaapp.dao.ZaposleniDao;
 import org.unibl.etf.osnovasredstvaapp.database.AppDatabase;
 import org.unibl.etf.osnovasredstvaapp.entity.Lokacija;
-import org.unibl.etf.osnovasredstvaapp.entity.Zaposleni;
-import org.unibl.etf.osnovasredstvaapp.ui.lokacija.placeholder.PlaceholderContent;
-import org.unibl.etf.osnovasredstvaapp.ui.osnovnosredstvo.OsnovnoSredstvoTask;
-import org.unibl.etf.osnovasredstvaapp.ui.zaposleni.ZaposleniRecyclerViewAdapter;
-import org.unibl.etf.osnovasredstvaapp.ui.zaposleni.ZaposleniTask;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -169,7 +164,6 @@ public class LokacijaFragment extends Fragment {
 
         // Inicijalizacija Room baze i DAO-a
         lokacijaDao = AppDatabase.getInstance(getContext()).lokacijaDao();
-        Log.d("LOK ", lokacijaDao.toString());
         // Pokretanje AsyncTask-a za dohvatanje podataka
         new LokacijaTask(this, lokacijaDao).execute();
 
@@ -185,7 +179,7 @@ public class LokacijaFragment extends Fragment {
         if (lokacije == null || lokacije.isEmpty()) {
             recyclerView.setVisibility(View.GONE);
             emptyView.setVisibility(View.VISIBLE);
-            Log.d("TEST", emptyView.getText().toString());
+
         } else {
             recyclerView.setVisibility(View.VISIBLE);
             emptyView.setVisibility(View.GONE);

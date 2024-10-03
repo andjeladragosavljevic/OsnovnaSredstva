@@ -9,11 +9,38 @@
 
     <string name="osnovna_sredstva">Osnovna sredstva</string>
     <string name="novo_osnovno_sredstvo">Novo osnovno sredstvo</string>
+    <string name="detalji">Detalji</string>
     <string name="lokacije">Lokacije</string>
     <string name="nova_lokacija">Nova lokacija</string>
     <string name="zaposleni">Zaposleni</string>
     <string name="novi_zaposleni">Novi zaposleni</string>
-    <string name="detalji">Detalji</string>
+    <string name="popisne_liste">Popisne liste</string>
+    <string name="nova_popisna_lista">Nova popisna lista</string>
+
+    <string name="prazna_lista">Nema podataka za prikaz</string>
+
+    <string name="izaberite_jezik">Izaberite jezik</string>
+
+    <string name="naziv">Naziv</string>
+    <string name="unos_naziva">Unesite naziv</string>
+    <string name="opis">Opis</string>
+    <string name="unos_opisa">Unesite opis</string>
+    <string name="skeniraj">Skeniraj barkod</string>
+    <string name="barkod">Barkod</string>
+    <string name="unos_barkoda">Unesite barkod ručno ili skenirajte</string>
+    <string name="cijena">Cijena</string>
+    <string name="unos_cijene">Unesite cijenu</string>
+    <string name="datum_kreiranja">Datum kreiranja</string>
+    <string name="zaduzena_osoba">Zadužena osoba</string>
+    <string name="izbor_osobe">Izaberite osobu</string>
+    <string name="zaduzena_lokacija">Zadužena lokacija</string>
+    <string name="izbor_lokacije">Izaberite lokaciju</string>
+    <string name="dodavanje_slike">Dodaj sliku</string>
+    <string name="snimanje_slike">Snimi sliku</string>
+
+
+    <string name="sacuvaj">Sačuvaj</string>
+    <string name="prikaz_odabrane_slike">Prikaz odabrane slike</string>
 
     <string name="opcije_za_pretragu">Opcije za pretragu</string>
     <string name="pretrazi_po_gradu">Pretraži po gradu</string>
@@ -42,4 +69,43 @@
     <string name="attachment_summary_on">Automatically download attachments for incoming emails
     </string>
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
+    <string name="ime">Ime</string>
+    <string name="unos_imena">Unesite ime</string>
+    <string name="prezime">Prezime</string>
+    <string name="unos_prezimena">Unesite prezime</string>
+    <string name="pozicija">Pozicija</string>
+    <string name="unos_pozicije">Unesite poziciju</string>
+    <string name="grad">Grad</string>
+    <string name="unos_grad">Unesite grad</string>
+    <string name="adresa">Adresa</string>
+    <string name="unos_adrese">Unesite adresu</string>
+    <string name="geografska_duzina">Geografska duzina</string>
+    <string name="unos_duzine">Unesite duzinu</string>
+    <string name="geografska_sirina">Geografska sirina</string>
+    <string name="unos_sirine">Unesite sirinu</string>
+
+    <string name="ime_prezime">%1$s %2$s</string>
+    <string name="adresa_grad">%1$s, %2$s</string>
+    <string name="azuriraj_lokaciju">Ažuriraj lokaciju</string>
+    <string name="azuriraj_zaposlenog">Ažuriraj zaposlenog</string>
+    <string name="naziv_popisne_liste">Naziv popisne liste</string>
+    <string name="unos_naziv_popisne_liste">Unesite naziv popisne liste</string>
+    <string name="azuriraj_listu">Ažuriraj  listu</string>
+    <string name="nova_osoba">Nova osoba</string>
+    <string name="unos_stavke">"Dodaj stavku ručno "</string>
+    <string name="nova_popisna_stavka">Nova popisna stavka</string>
+    <string name="popisne_stavke">Popisne stavke</string>
+    <string name="opcije">Opcije</string>
+    <string name="azuriraj">Ažuriraj</string>
+    <string name="obrisi">Obriši</string>
+    <string name="popunite_sva_polja">Molimo popunite sva polja</string>
+    <string name="uspjesno_azuriranje">Uspješno ažuriranje</string>
+    <string name="uspjesno_dodavanje">Uspješno dodavanje</string>
+
+    <string name="trenutna_osoba">Trenutna osoba: %1$s %2$s</string>
+    <string name="nova_osoba_stavka">Nova osoba: %1$s %2$s</string>
+    <string name="trenutna_lokacija">Trenutna lokacija: %1$s, %2$s</string>
+    <string name="nova_lokacija_stavka">Nova lokacija: %1$s, %2$s</string>
+    <string name="n_a">N/A</string>
+
 </resources>

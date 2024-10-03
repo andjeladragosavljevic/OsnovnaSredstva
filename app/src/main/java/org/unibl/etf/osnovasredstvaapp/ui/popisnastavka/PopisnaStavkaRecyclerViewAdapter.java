@@ -1,17 +1,14 @@
 package org.unibl.etf.osnovasredstvaapp.ui.popisnastavka;
 
-import androidx.annotation.NonNull;
+
 import androidx.fragment.app.FragmentActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
-import androidx.recyclerview.widget.ConcatAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
@@ -25,22 +22,20 @@ import org.unibl.etf.osnovasredstvaapp.entity.Lokacija;
 import org.unibl.etf.osnovasredstvaapp.entity.OsnovnoSredstvo;
 import org.unibl.etf.osnovasredstvaapp.entity.PopisnaStavka;
 import org.unibl.etf.osnovasredstvaapp.entity.Zaposleni;
-import org.unibl.etf.osnovasredstvaapp.ui.osnovnosredstvo.OsnovnoSredstvoBottomSheetDialogFragment;
-import org.unibl.etf.osnovasredstvaapp.ui.osnovnosredstvo.OsnovnoSredstvoTask;
 import org.unibl.etf.osnovasredstvaapp.ui.popisnastavka.placeholder.PlaceholderContent.PlaceholderItem;
 import org.unibl.etf.osnovasredstvaapp.databinding.FragmentPopsinaStavkaBinding;
 
 import java.util.List;
-import java.util.Locale;
+
 
 /**
  * {@link RecyclerView.Adapter} that can display a {@link PlaceholderItem}.
  * TODO: Replace the implementation with code for your data type.
  */
 public class PopisnaStavkaRecyclerViewAdapter extends RecyclerView.Adapter<PopisnaStavkaRecyclerViewAdapter.ViewHolder> {
-    private  List<PopisnaStavka> stavke;
-    private  ZaposleniDao zaposleniDao;
-    private  LokacijaDao lokacijaDao;
+    private List<PopisnaStavka> stavke;
+    private ZaposleniDao zaposleniDao;
+    private LokacijaDao lokacijaDao;
     private OsnovnoSredstvoDao osnovnoSredstvoDao;
     private PopisnaStavkaDao popisnaStavkaDao;
     private Context context;
@@ -57,12 +52,6 @@ public class PopisnaStavkaRecyclerViewAdapter extends RecyclerView.Adapter<Popis
 
     }
 
-    public void addStavka(PopisnaStavka stavka)
-    {
-        Log.d("stavka", stavka.getTrenutnaOsobaId()+"");
-        stavke.add(stavka);
-        notifyItemInserted(stavke.size() - 1);
-    }
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
@@ -81,25 +70,45 @@ public class PopisnaStavkaRecyclerViewAdapter extends RecyclerView.Adapter<Popis
         // Popunite view-ove podacima iz stavke
         holder.nazivOsnovnogSredstvaTextView.setText(os.getNaziv());
 
-        // Prikaz imena trenutne i nove osobe
-        holder.trenutnaOsobaTextView.setText("Trenutna osoba: " + (trenutnaOsoba != null ? trenutnaOsoba.getIme() + " " + trenutnaOsoba.getPrezime() : "N/A"));
-        holder.novaOsobaTextView.setText("Nova osoba: " + (novaOsoba != null ? novaOsoba.getIme() + " " + novaOsoba.getPrezime() : "N/A"));
+        if (trenutnaOsoba != null) {
+            String trenutnaOsobaText = holder.itemView.getContext().getString(R.string.trenutna_osoba, trenutnaOsoba.getIme(), trenutnaOsoba.getPrezime());
+            holder.trenutnaOsobaTextView.setText(trenutnaOsobaText);
+        } else {
+            holder.trenutnaOsobaTextView.setText(holder.itemView.getContext().getString(R.string.n_a));
+        }
+
+        if (novaOsoba != null) {
+            String novaOsobaText = holder.itemView.getContext().getString(R.string.nova_osoba_stavka, novaOsoba.getIme(), novaOsoba.getPrezime());
+            holder.novaOsobaTextView.setText(novaOsobaText);
+        } else {
+            holder.novaOsobaTextView.setText(holder.itemView.getContext().getString(R.string.n_a));
+        }
 
         // Prikaz trenutne i nove lokacije
-        holder.trenutnaLokacijaTextView.setText("Trenutna lokacija: " + (trenutnaLokacija != null ? trenutnaLokacija.getAdresa() + ", " + trenutnaLokacija.getGrad() : "N/A"));
-        holder.novaLokacijaTextView.setText("Nova lokacija: " + (novaLokacija != null ? novaLokacija.getAdresa() + ", " + novaLokacija.getGrad() : "N/A"));
+        if (trenutnaLokacija != null) {
+            String trenutnaLokacijaText = holder.itemView.getContext().getString(R.string.trenutna_lokacija, trenutnaLokacija.getAdresa(), trenutnaLokacija.getGrad());
+            holder.trenutnaLokacijaTextView.setText(trenutnaLokacijaText);
+        } else {
+            holder.trenutnaLokacijaTextView.setText(holder.itemView.getContext().getString(R.string.n_a));
+        }
 
+        if (novaLokacija != null) {
+            String novaLokacijaText = holder.itemView.getContext().getString(R.string.nova_lokacija_stavka, novaLokacija.getAdresa(), novaLokacija.getGrad());
+            holder.novaLokacijaTextView.setText(novaLokacijaText);
+        } else {
+            holder.novaLokacijaTextView.setText(holder.itemView.getContext().getString(R.string.n_a));
+        }
         holder.itemView.setOnClickListener(v -> {
             // Create and show the BottomSheetDialog
             PopisnaStavkaBottomSheetDialogFragment bottomSheetDialog = new PopisnaStavkaBottomSheetDialogFragment(stavke.get(position), new PopisnaStavkaBottomSheetDialogFragment.OnOptionSelectedListener() {
                 @Override
                 public void onDelete(PopisnaStavka popisnaStavka) {
-                  deleteStavka(popisnaStavka);
+                    deleteStavka(popisnaStavka);
                 }
 
                 @Override
                 public void onUpdate(PopisnaStavka popisnaStavka) {
-                   updateStavka(popisnaStavka);
+                    updateStavka(popisnaStavka);
                 }
             });
 

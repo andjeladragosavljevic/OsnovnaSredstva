@@ -8,4 +8,13 @@
     <color name="brown">#7C4F44</color>
     <color name="list_item_background">#FFFFFF</color>
     <color name="text_color_black">#000000</color>
+    <color name="dark_background">#2C2C2C</color>
+    <color name="dark_primary">#4D6A4D</color>
+    <color name="dark_primary_variant">#3A503A</color>
+    <color name="dark_text_beige">#EDE0C8</color>
+    <color name="dark_secondary">#6A8E68</color>
+    <color name="dark_secondary_variant">#495B49</color>
+    <color name="dark_brown_text">#A67F5E</color>
+    <color name="dark_list_item_background">#393939</color>
+    <color name="dark_text_color">#FFFFFF</color>
 </resources>

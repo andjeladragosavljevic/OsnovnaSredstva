@@ -5,8 +5,7 @@ import android.os.Bundle;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.fragment.app.Fragment;
 
-import android.system.Os;
-import android.util.Log;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,7 +28,6 @@ import org.unibl.etf.osnovasredstvaapp.entity.Lokacija;
 import org.unibl.etf.osnovasredstvaapp.entity.OsnovnoSredstvo;
 import org.unibl.etf.osnovasredstvaapp.entity.PopisnaStavka;
 import org.unibl.etf.osnovasredstvaapp.entity.Zaposleni;
-import org.unibl.etf.osnovasredstvaapp.ui.osnovnosredstvo.OsnovnoSredstvoTask;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,7 +38,7 @@ import java.util.List;
  * create an instance of this fragment.
  */
 public class AddPopisnaStavkaFragment extends Fragment {
-    private EditText  trenutnaOsobaEditText, trenutnaLokacijaEditText;
+    private EditText trenutnaOsobaEditText, trenutnaLokacijaEditText;
     private AutoCompleteTextView novaOsobaEditText, novaLokacijaEditText, osnovnoSredstvoAutoCompleteTextView;
     private Button saveStavkaButton;
     private int popisnaListaId;
@@ -76,7 +74,7 @@ public class AddPopisnaStavkaFragment extends Fragment {
         if (getArguments() != null) {
             popisnaListaId = getArguments().getInt("popisnaListaId");
             isSkeniranje = getArguments().getBoolean("isSkeniranje");
-            popisnaStavkaZaAzuriranje = (PopisnaStavka)getArguments().getSerializable(ARG_PS);
+            popisnaStavkaZaAzuriranje = (PopisnaStavka) getArguments().getSerializable(ARG_PS);
         }
 
         osnovnoSredstvoDao = AppDatabase.getInstance(getContext()).osnovnoSredstvoDao();
@@ -102,11 +100,8 @@ public class AddPopisnaStavkaFragment extends Fragment {
         postaviAutoCompleteAdapterZaOsobe();
         postaviAutoCompleteAdapterZaLokacije();
 
-        if(popisnaStavkaZaAzuriranje != null) {
-
-            Log.d("STAVKA", popisnaStavkaZaAzuriranje.getOsnovnoSredstvoId()+"");
-            new OsGetTask(
-                    this, osnovnoSredstvoDao, popisnaStavkaZaAzuriranje.getOsnovnoSredstvoId()).execute();
+        if (popisnaStavkaZaAzuriranje != null) {
+            new OsGetTask(this, osnovnoSredstvoDao, popisnaStavkaZaAzuriranje.getOsnovnoSredstvoId()).execute();
 
         }
 
@@ -122,7 +117,6 @@ public class AddPopisnaStavkaFragment extends Fragment {
     }
 
     public void updateList(OsnovnoSredstvo os) {
-        Log.d("POPLISTA", popisnaListaId+"");
         if (trenutnaStavka == null) {
             trenutnaStavka = new PopisnaStavka();  // Inicijalizuj objekat ako je null
         }
@@ -134,7 +128,7 @@ public class AddPopisnaStavkaFragment extends Fragment {
 
     private void saveStavka() {
         if (trenutnaStavka == null || trenutnaStavka.getOsnovnoSredstvoId() == 0) {
-            Toast.makeText(getContext(), "Molimo unesite validno osnovno sredstvo.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), getString(R.string.popunite_sva_polja), Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -149,11 +143,13 @@ public class AddPopisnaStavkaFragment extends Fragment {
             // Ažuriranje postojeće stavke
             trenutnaStavka.setId(popisnaStavkaZaAzuriranje.getId());  // Postavljanje ID-a stavke za ažuriranje
             new PopisnaStavkaTask(null, popisnaStavkaDao, PopisnaStavkaTask.OperationType.UPDATE, trenutnaStavka).execute();
-            Toast.makeText(getContext(), "Stavka je uspešno ažurirana.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), getString(R.string.uspjesno_azuriranje), Toast.LENGTH_SHORT).show();
+
         } else {
             // Unos nove stavke
             new PopisnaStavkaTask(null, popisnaStavkaDao, PopisnaStavkaTask.OperationType.INSERT, trenutnaStavka).execute();
-            Toast.makeText(getContext(), "Stavka je uspešno sačuvana.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), getString(R.string.uspjesno_dodavanje), Toast.LENGTH_SHORT).show();
+
         }
     }
 
@@ -181,6 +177,7 @@ public class AddPopisnaStavkaFragment extends Fragment {
             }
         });
     }
+
     private void postaviAutoCompleteAdapterZaOsobe() {
         // Pretpostavljamo da 'zaposleniDao.getAll()' vraća listu svih zaposlenih
         List<Zaposleni> zaposleniList = zaposleniDao.getAll();
@@ -230,7 +227,6 @@ public class AddPopisnaStavkaFragment extends Fragment {
             }
         });
     }
-
 
 
     private void skenirajBarkod() {

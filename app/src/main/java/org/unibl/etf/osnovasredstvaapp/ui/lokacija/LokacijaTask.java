@@ -3,14 +3,8 @@ package org.unibl.etf.osnovasredstvaapp.ui.lokacija;
 import android.os.AsyncTask;
 
 import org.unibl.etf.osnovasredstvaapp.dao.LokacijaDao;
-import org.unibl.etf.osnovasredstvaapp.dao.OsnovnoSredstvoDao;
-import org.unibl.etf.osnovasredstvaapp.dao.ZaposleniDao;
 import org.unibl.etf.osnovasredstvaapp.entity.Lokacija;
-import org.unibl.etf.osnovasredstvaapp.entity.Zaposleni;
-import org.unibl.etf.osnovasredstvaapp.ui.osnovnosredstvo.OsnovnoSredstvoFragment;
-import org.unibl.etf.osnovasredstvaapp.ui.osnovnosredstvo.OsnovnoSredstvoTask;
-import org.unibl.etf.osnovasredstvaapp.ui.zaposleni.ZaposleniFragment;
-import org.unibl.etf.osnovasredstvaapp.ui.zaposleni.ZaposleniTask;
+
 
 import java.lang.ref.WeakReference;
 import java.util.List;

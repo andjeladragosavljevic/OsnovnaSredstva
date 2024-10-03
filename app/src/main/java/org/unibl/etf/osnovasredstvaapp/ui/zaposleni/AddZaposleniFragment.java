@@ -75,7 +75,8 @@ public class AddZaposleniFragment extends Fragment {
             ime.setText(zaposleniZaAzuriranje.getIme());
             prezime.setText(zaposleniZaAzuriranje.getPrezime());
             pozicija.setText(zaposleniZaAzuriranje.getPozicija());
-            saveButton.setText("Ažuriraj zaposlenog");
+            saveButton.setText(getString(R.string.azuriraj_zaposlenog));
+
         }
 
         saveButton.setOnClickListener(new View.OnClickListener(){
@@ -86,7 +87,8 @@ public class AddZaposleniFragment extends Fragment {
                 String pozicijaZaposlenog = pozicija.getText().toString();
 
                 if (imeZaposlenog.isEmpty() || prezimeZaposlenog.isEmpty() || pozicijaZaposlenog.isEmpty()) {
-                    Toast.makeText(getContext(), "Sva polja moraju biti popunjena", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), getString(R.string.popunite_sva_polja), Toast.LENGTH_SHORT).show();
+
                     return;
                 }
 
@@ -98,7 +100,8 @@ public class AddZaposleniFragment extends Fragment {
                     noviZaposleni.setPozicija(pozicijaZaposlenog);
 
                     new ZaposleniTask(null, zaposleniDao, ZaposleniTask.OperationType.INSERT, noviZaposleni).execute();
-                    Toast.makeText(getContext(), "Zaposleni uspješno dodat", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), getString(R.string.uspjesno_dodavanje), Toast.LENGTH_SHORT).show();
+
                 } else {
                     // Ažuriranje postojećeg zaposlenog
                     zaposleniZaAzuriranje.setIme(imeZaposlenog);
@@ -106,7 +109,8 @@ public class AddZaposleniFragment extends Fragment {
                     zaposleniZaAzuriranje.setPozicija(pozicijaZaposlenog);
 
                     new ZaposleniTask(null, zaposleniDao, ZaposleniTask.OperationType.UPDATE, zaposleniZaAzuriranje).execute();
-                    Toast.makeText(getContext(), "Zaposleni uspješno ažuriran", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), getString(R.string.uspjesno_azuriranje), Toast.LENGTH_SHORT).show();
+
                 }
             }
         });

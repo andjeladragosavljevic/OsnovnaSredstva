@@ -4,7 +4,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
-import android.util.Log;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,11 +13,8 @@ import android.widget.Button;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 import org.unibl.etf.osnovasredstvaapp.R;
-import org.unibl.etf.osnovasredstvaapp.entity.Lokacija;
-import org.unibl.etf.osnovasredstvaapp.entity.OsnovnoSredstvo;
 import org.unibl.etf.osnovasredstvaapp.entity.PopisnaLista;
-import org.unibl.etf.osnovasredstvaapp.entity.PopisnaStavka;
-import org.unibl.etf.osnovasredstvaapp.ui.lokacija.LokacijaBottomSheetDialogFragment;
+
 
 /**
  * A simple {@link Fragment} subclass.

@@ -5,12 +5,11 @@
     android:orientation="vertical"
     android:padding="16dp">
 
-    <!-- Naziv popisne liste -->
     <TextView
         android:id="@+id/nazivPopisneListeLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Naziv popisne liste"
+        android:text="@string/naziv_popisne_liste"
         android:textSize="16sp"
         android:textStyle="bold" />
 
@@ -18,15 +17,17 @@
         android:id="@+id/nazivListe"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Unesite naziv popisne liste"
-        android:padding="8dp" />
+        android:hint="@string/unos_naziv_popisne_liste"
+        android:importantForAutofill="no"
+        android:padding="8dp"
+        android:minHeight="48dp"/>
 
-    <!-- Dugme za kreiranje popisne liste -->
+
     <Button
         android:id="@+id/kreirajListuButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Kreiraj popisnu listu"
+        android:text="@string/sacuvaj"
         android:layout_marginTop="16dp"
         android:textSize="16sp" />
 
@@ -35,4 +36,3 @@
 
 </LinearLayout>
 
-    <!--            android:drawableLeft="@drawable/ic_barcode"-->

@@ -2,12 +2,9 @@ package org.unibl.etf.osnovasredstvaapp.ui.popisnalista;
 
 import android.os.Bundle;
 
-import androidx.activity.result.ActivityResultLauncher;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,23 +12,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.journeyapps.barcodescanner.ScanContract;
-import com.journeyapps.barcodescanner.ScanOptions;
 
 import org.unibl.etf.osnovasredstvaapp.R;
-import org.unibl.etf.osnovasredstvaapp.dao.OsnovnoSredstvoDao;
 import org.unibl.etf.osnovasredstvaapp.dao.PopisnaListaDao;
-import org.unibl.etf.osnovasredstvaapp.dao.PopisnaStavkaDao;
 import org.unibl.etf.osnovasredstvaapp.database.AppDatabase;
-import org.unibl.etf.osnovasredstvaapp.entity.OsnovnoSredstvo;
 import org.unibl.etf.osnovasredstvaapp.entity.PopisnaLista;
-import org.unibl.etf.osnovasredstvaapp.entity.PopisnaStavka;
-import org.unibl.etf.osnovasredstvaapp.entity.Zaposleni;
 import org.unibl.etf.osnovasredstvaapp.ui.popisnastavka.PopisnaStavkaRecyclerViewAdapter;
-import org.unibl.etf.osnovasredstvaapp.ui.zaposleni.ZaposleniTask;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
@@ -107,7 +95,8 @@ public class AddPopisnaListaFragment extends Fragment {
         if (listaZaAzuriranje != null) {
             nazivListeEditText.setText(listaZaAzuriranje.getNaziv());
 
-            kreirajListuButton.setText("Ažuriraj listu");
+            kreirajListuButton.setText(getString(R.string.azuriraj_listu));
+
         }
 
         // Kreiranje popisne liste
@@ -115,7 +104,7 @@ public class AddPopisnaListaFragment extends Fragment {
             String naziv = nazivListeEditText.getText().toString();
 
             if (naziv.isEmpty()) {
-                Toast.makeText(getContext(), "Naziv mora biti popunjen", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), getString(R.string.popunite_sva_polja), Toast.LENGTH_SHORT).show();
                 return;
             }
 
@@ -126,14 +115,16 @@ public class AddPopisnaListaFragment extends Fragment {
                 popisnaListaDao.insert(trenutnaLista);
 
                 new PopisnaListaTask(null, popisnaListaDao, PopisnaListaTask.OperationType.INSERT, trenutnaLista);
-                Toast.makeText(getContext(), "Popisna lista uspješno dodat", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), getString(R.string.uspjesno_dodavanje), Toast.LENGTH_SHORT).show();
+
             } else {
                 // Ažuriranje postojećeg zaposlenog
                 listaZaAzuriranje.setNaziv(naziv);
 
 
                 new PopisnaListaTask(null, popisnaListaDao, PopisnaListaTask.OperationType.UPDATE, listaZaAzuriranje).execute();
-                Toast.makeText(getContext(), "Popisna lista uspješno ažurirana", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), getString(R.string.uspjesno_azuriranje), Toast.LENGTH_SHORT).show();
+
             }
 
 

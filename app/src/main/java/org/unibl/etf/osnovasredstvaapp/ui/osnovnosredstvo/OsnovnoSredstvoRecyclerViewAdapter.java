@@ -1,5 +1,6 @@
 package org.unibl.etf.osnovasredstvaapp.ui.osnovnosredstvo;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -7,7 +8,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.system.Os;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,14 +15,9 @@ import android.widget.TextView;
 
 import org.unibl.etf.osnovasredstvaapp.R;
 import org.unibl.etf.osnovasredstvaapp.dao.OsnovnoSredstvoDao;
-import org.unibl.etf.osnovasredstvaapp.dao.ZaposleniDao;
 import org.unibl.etf.osnovasredstvaapp.database.AppDatabase;
 import org.unibl.etf.osnovasredstvaapp.entity.OsnovnoSredstvo;
-import org.unibl.etf.osnovasredstvaapp.entity.Zaposleni;
 import org.unibl.etf.osnovasredstvaapp.ui.osnovnosredstvo.placeholder.PlaceholderContent.PlaceholderItem;
-import org.unibl.etf.osnovasredstvaapp.databinding.FragmentOsnovnoSredstvoBinding;
-import org.unibl.etf.osnovasredstvaapp.ui.zaposleni.ZaposleniBottomSheetDialogFragment;
-import org.unibl.etf.osnovasredstvaapp.ui.zaposleni.ZaposleniTask;
 
 import java.util.List;
 
@@ -51,7 +46,6 @@ public class OsnovnoSredstvoRecyclerViewAdapter extends RecyclerView.Adapter<Osn
         return new ViewHolder(view);
 
     }
-
 
 
     public void updateData(List<OsnovnoSredstvo> newData) {
@@ -87,6 +81,7 @@ public class OsnovnoSredstvoRecyclerViewAdapter extends RecyclerView.Adapter<Osn
             bottomSheetDialog.show(((FragmentActivity) context).getSupportFragmentManager(), "OptionsBottomSheetDialog");
         });
     }
+
     private void deleteOsnovnoSredstvo(OsnovnoSredstvo osnovnoSredstvo) {
         new OsnovnoSredstvoTask(null, osnovnoSredstvoDao, OsnovnoSredstvoTask.OperationType.DELETE, osnovnoSredstvo).execute();
         // Osvježi listu nakon brisanja
@@ -107,11 +102,11 @@ public class OsnovnoSredstvoRecyclerViewAdapter extends RecyclerView.Adapter<Osn
         args.putSerializable("osnovnoSredstvo", osnovnoSredstvo);
         navController.navigate(R.id.action_nav_osnovno_sredsvo_to_nav_details, args);
     }
+
     @Override
     public int getItemCount() {
         return osnovnaSredstva.size();
     }
-
 
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -126,6 +121,7 @@ public class OsnovnoSredstvoRecyclerViewAdapter extends RecyclerView.Adapter<Osn
             mBarkodView = view.findViewById(R.id.barkod);
         }
 
+        @NonNull
         @Override
         public String toString() {
             return super.toString() + " '" + mContentView.getText() + "'";

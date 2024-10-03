@@ -71,6 +71,6 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:visibility="gone"
-        android:text="Nema podataka za prikaz" />
+        android:text="@string/prazna_lista" />
 
 </RelativeLayout>

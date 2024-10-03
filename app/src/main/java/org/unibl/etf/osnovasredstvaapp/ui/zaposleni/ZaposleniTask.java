@@ -75,7 +75,7 @@ public class ZaposleniTask extends AsyncTask<Void, Void, List<Zaposleni>> {
             case READ:
                 return zaposleniDao.getAll();
         }
-        return null; // Vraća se null osim u slučaju READ operacije
+        return null;
     }
 
     @Override

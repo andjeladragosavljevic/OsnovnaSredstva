@@ -23,11 +23,9 @@ import android.widget.TextView;
 import com.google.android.material.card.MaterialCardView;
 
 import org.unibl.etf.osnovasredstvaapp.R;
-import org.unibl.etf.osnovasredstvaapp.dao.OsnovnoSredstvoDao;
 import org.unibl.etf.osnovasredstvaapp.dao.ZaposleniDao;
 import org.unibl.etf.osnovasredstvaapp.database.AppDatabase;
 import org.unibl.etf.osnovasredstvaapp.entity.Zaposleni;
-import org.unibl.etf.osnovasredstvaapp.ui.osnovnosredstvo.OsnovnoSredstvoTask;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -112,7 +110,7 @@ public class ZaposleniFragment extends Fragment {
 
         // Set click listener for header to toggle expansion/collapse
         searchCard.findViewById(R.id.expansionHeader).setOnClickListener(v -> toggleExpansion());
-        // Pretraga po nazivu
+
         searchViewIme = view.findViewById(R.id.searchViewIme);
         searchViewIme.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -128,7 +126,7 @@ public class ZaposleniFragment extends Fragment {
             }
         });
 
-        // Pretraga po barkodu
+
         searchViewPrezime = view.findViewById(R.id.searchViewPrezime);  // Novo polje za barkod
         searchViewPrezime.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -166,7 +164,7 @@ public class ZaposleniFragment extends Fragment {
         // Inicijalizacija Room baze i DAO-a
         ZaposleniDao zaposleniDao = AppDatabase.getInstance(getContext()).zaposleniDao();
 
-        // Pokretanje AsyncTask-a za dohvatanje podataka
+
         new ZaposleniTask(this, zaposleniDao).execute();
 
 

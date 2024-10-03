@@ -12,9 +12,7 @@ import android.widget.Button;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 import org.unibl.etf.osnovasredstvaapp.R;
-import org.unibl.etf.osnovasredstvaapp.entity.OsnovnoSredstvo;
 import org.unibl.etf.osnovasredstvaapp.entity.PopisnaStavka;
-import org.unibl.etf.osnovasredstvaapp.ui.osnovnosredstvo.OsnovnoSredstvoBottomSheetDialogFragment;
 
 /**
  * A simple {@link Fragment} subclass.

@@ -9,48 +9,58 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <!-- Ime zaposlenog -->
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Ime" />
+            android:text="@string/ime" />
 
         <EditText
             android:id="@+id/ime"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Unesite ime" />
+            android:hint="@string/unos_imena"
+            android:importantForAutofill="no"
+            android:inputType="text"
+            android:minHeight="48dp"/>
 
-        <!-- Prezime zaposlenog -->
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Prezime" />
+            android:text="@string/prezime" />
 
         <EditText
             android:id="@+id/prezime"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Unesite prezime" />
+            android:hint="@string/unos_prezimena"
+            android:importantForAutofill="no"
+            android:inputType="text"
+            android:minHeight="48dp"/>
 
 
         <!--Pozicija zaposlenog -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Pozicija" />
+            android:text="@string/pozicija" />
 
         <EditText
             android:id="@+id/pozicija"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Unesite poziciju" />
+            android:hint="@string/unos_pozicije"
+            android:inputType="text"
+            android:importantForAutofill="no"
+            android:minHeight="48dp"/>
 
         <!-- Dugme za spremanje -->
         <Button
             android:id="@+id/save_zaposleni"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Sačuvaj" />
+            android:text="@string/sacuvaj"
+            android:maxWidth="488dp"/>
     </LinearLayout>
 </ScrollView>

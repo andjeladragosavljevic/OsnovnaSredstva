@@ -1,14 +1,11 @@
 package org.unibl.etf.osnovasredstvaapp.ui.popisnalista;
 
 import android.os.AsyncTask;
-import android.util.Log;
 
-import org.unibl.etf.osnovasredstvaapp.dao.OsnovnoSredstvoDao;
 import org.unibl.etf.osnovasredstvaapp.dao.PopisnaListaDao;
-import org.unibl.etf.osnovasredstvaapp.entity.OsnovnoSredstvo;
+
 import org.unibl.etf.osnovasredstvaapp.entity.PopisnaLista;
-import org.unibl.etf.osnovasredstvaapp.ui.osnovnosredstvo.OsnovnoSredstvoFragment;
-import org.unibl.etf.osnovasredstvaapp.ui.osnovnosredstvo.OsnovnoSredstvoTask;
+
 
 import java.lang.ref.WeakReference;
 import java.util.List;

@@ -3,7 +3,6 @@ package org.unibl.etf.osnovasredstvaapp.ui.popisnastavka;
 import android.os.AsyncTask;
 
 import org.unibl.etf.osnovasredstvaapp.dao.PopisnaStavkaDao;
-import org.unibl.etf.osnovasredstvaapp.entity.OsnovnoSredstvo;
 import org.unibl.etf.osnovasredstvaapp.entity.PopisnaStavka;
 
 
